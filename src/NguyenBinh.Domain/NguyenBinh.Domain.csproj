@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <!-- Chi cac kieu POCO cua Identity (IdentityUser/IdentityRole), khong keo EF Core vao Domain. -->
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NguyenBinh.Shared\NguyenBinh.Shared.csproj" />
+  </ItemGroup>
+</Project>

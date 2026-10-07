@@ -1,0 +1,14 @@
+<Project>
+  <!-- Cau hinh dung chung cho moi project. Nang cap .NET: chi doi TargetFramework o day. -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
+    <Company>Nguyen Binh Technology</Company>
+    <Product>Nguyen Binh Official</Product>
+  </PropertyGroup>
+</Project>
