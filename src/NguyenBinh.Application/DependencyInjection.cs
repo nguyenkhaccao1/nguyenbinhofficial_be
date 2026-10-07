@@ -36,6 +36,8 @@ public static class DependencyInjection
         services.AddScoped<IMediaUsageTracker, MediaUsageTracker>();
         services.AddScoped<IMediaService, MediaService>();
         services.AddScoped<IMediaVariantProcessor, MediaVariantProcessor>();
+        services.AddScoped<IPublicMediaResolver, PublicMediaResolver>();
+        services.AddScoped<Public.IPublicContentService, Public.PublicContentService>();
 
         services.AddContentModules();
 
