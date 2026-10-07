@@ -1,0 +1,90 @@
+# Nguyen Binh Official — production tren VPS dung chung voi AciPlatform / Com Thi No.
+#
+# - Cong 80/443 thuoc container nginx dung chung "aciplatform-nginx" (repo AciPlatform). Site nay KHONG mo
+#   cong ra ngoai; nginx dung chung ket noi toi cac container qua mang "aciplatform_aciplatform-network".
+# - SQL Server chay truc tiep tren host (port 1433) → API truy cap qua host.docker.internal.
+# - Bi mat nam trong deploy/.env (chmod 600, khong commit). Mau: deploy/.env.example
+#
+# Thu muc tren server: ~/apps/nguyenbinhofficial_be (repo nay) va ~/apps/nguyenbinhofficial_fe (repo frontend).
+name: nguyenbinhofficial
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    image: nguyenbinhofficial-api
+    container_name: nguyenbinh-api
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Redis__ConnectionString: nguyenbinh-redis:6379,abortConnect=false
+      ForwardedHeaders__TrustAllProxies: "true"
+      Storage__RootPath: /app/storage
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - api-storage:/app/storage
+    depends_on:
+      redis:
+        condition: service_started
+    networks:
+      - internal
+      - shared-proxy
+    logging: &logging
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+
+  web:
+    build:
+      context: ../../nguyenbinhofficial_fe
+      dockerfile: Dockerfile
+      target: web
+    image: nguyenbinhofficial-web
+    container_name: nguyenbinh-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      INTERNAL_API_URL: http://nguyenbinh-api:8080
+      # Chi bat khi website da hoan thien noi dung (Phase 3) — truoc do moi trang deu noindex.
+      SITE_INDEXABLE: ${SITE_INDEXABLE:-false}
+    depends_on:
+      - api
+    networks:
+      - internal
+      - shared-proxy
+    logging: *logging
+
+  admin:
+    build:
+      context: ../../nguyenbinhofficial_fe
+      dockerfile: Dockerfile
+      target: admin
+    image: nguyenbinhofficial-admin
+    container_name: nguyenbinh-admin
+    restart: unless-stopped
+    networks:
+      - shared-proxy
+    logging: *logging
+
+  redis:
+    image: redis:7-alpine
+    container_name: nguyenbinh-redis
+    restart: unless-stopped
+    command: ["redis-server", "--save", "", "--appendonly", "no", "--maxmemory", "128mb", "--maxmemory-policy", "allkeys-lru"]
+    networks:
+      - internal
+    logging: *logging
+
+volumes:
+  api-storage:
+
+networks:
+  internal:
+  shared-proxy:
+    name: aciplatform_aciplatform-network
+    external: true

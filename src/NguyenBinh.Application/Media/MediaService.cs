@@ -14,7 +14,7 @@ public interface IMediaService
 {
     Task<PagedResult<MediaDto>> ListAsync(MediaListQuery query, CancellationToken ct = default);
     Task<MediaDetailDto> GetAsync(Guid id, CancellationToken ct = default);
-    /// <param name="folderPath">Duong dan thu muc theo ten hien thi (vd "Dự án/PerfectKey"), tu tao neu chua co.</param>
+    /// <summary>Tai len nhieu file; folderPath (vd "Dự án/PerfectKey") tu tao cay thu muc neu chua co.</summary>
     Task<IReadOnlyList<UploadResultItem>> UploadAsync(IReadOnlyList<UploadFile> files, Guid? folderId, string? folderPath,
         CancellationToken ct = default);
     Task<MediaDto> UpdateAsync(Guid id, UpdateMediaRequest request, CancellationToken ct = default);

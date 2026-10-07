@@ -17,7 +17,9 @@ public sealed record LookupsDto(
     IReadOnlyList<LookupItem> Tags,
     IReadOnlyList<LookupItem> Authors,
     IReadOnlyList<LookupItem> Products,
-    IReadOnlyList<LookupItem> Projects);
+    IReadOnlyList<LookupItem> Projects,
+    IReadOnlyList<LookupItem> Services,
+    IReadOnlyList<LookupItem> SolutionPages);
 
 public interface ILookupService
 {
@@ -40,7 +42,11 @@ internal sealed class LookupService(IAppDbContext db) : ILookupService
         await db.Set<Product>().AsNoTracking().OrderBy(p => p.SortOrder).ThenBy(p => p.Name)
             .Select(p => new LookupItem(p.Id, p.Name, p.Slug)).ToListAsync(ct),
         await db.Set<Project>().AsNoTracking().OrderBy(p => p.SortOrder).ThenBy(p => p.Name)
-            .Select(p => new LookupItem(p.Id, p.Name, p.Slug)).ToListAsync(ct));
+            .Select(p => new LookupItem(p.Id, p.Name, p.Slug)).ToListAsync(ct),
+        await db.Set<Service>().AsNoTracking().OrderBy(s => s.SortOrder).ThenBy(s => s.Name)
+            .Select(s => new LookupItem(s.Id, s.Name, s.Slug)).ToListAsync(ct),
+        await db.Set<Page>().AsNoTracking().Where(p => p.PageType == PageType.Solution).OrderBy(p => p.Path)
+            .Select(p => new LookupItem(p.Id, p.Title, p.Path)).ToListAsync(ct));
 
     private async Task<IReadOnlyList<LookupItem>> Taxonomy<T>(CancellationToken ct) where T : TaxonomyEntity =>
         await db.Set<T>().AsNoTracking().OrderBy(t => t.SortOrder).ThenBy(t => t.Name)
