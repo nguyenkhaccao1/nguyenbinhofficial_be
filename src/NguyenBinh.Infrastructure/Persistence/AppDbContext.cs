@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NguyenBinh.Application.Common.Abstractions;
 using NguyenBinh.Domain.Common;
+using NguyenBinh.Domain.Content;
 using NguyenBinh.Domain.Identity;
 using NguyenBinh.Domain.Media;
 using NguyenBinh.Domain.Platform;
@@ -30,6 +31,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
+        ApplyContentConventions(builder);
         ApplySoftDeleteFilters(builder);
     }
 
@@ -39,6 +41,18 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
         builder.Properties<ContentStatus>().HaveConversion<string>().HaveMaxLength(32);
         builder.Properties<MediaKind>().HaveConversion<string>().HaveMaxLength(32);
         builder.Properties<MediaProcessingState>().HaveConversion<string>().HaveMaxLength(32);
+        builder.Properties<ProjectContentType>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<CommercialType>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<ProjectRole>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<OwnershipType>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<ProjectState>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<ProjectMediaKind>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<ProjectLinkKind>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<ProductType>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<BillingPeriod>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<TechnologyGroup>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<FaqScope>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<PageType>().HaveConversion<string>().HaveMaxLength(40);
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -116,6 +130,25 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
         foreach (var prop in entry.Properties.Where(p => !p.Metadata.IsPrimaryKey()))
             if (!prop.Metadata.GetValueComparer().Equals(prop.OriginalValue, prop.CurrentValue))
                 prop.IsModified = true;
+    }
+
+    /// <summary>RowVersion cho moi noi dung (409 khi sua dong thoi) va SEO luu JSON tren bang cua entity.</summary>
+    private static void ApplyContentConventions(ModelBuilder builder)
+    {
+        foreach (var type in builder.Model.GetEntityTypes().Where(t => !t.IsOwned()).ToList())
+        {
+            // Id (Guid v7) do ung dung sinh → bao EF khong cho DB sinh. Neu khong, ban ghi con moi them vao
+            // collection (features, media...) khi sua bi EF coi la ban ghi cu va UPDATE 0 dong → loi concurrency.
+            if (typeof(Entity).IsAssignableFrom(type.ClrType) && type.BaseType is null)
+                builder.Entity(type.ClrType).Property(nameof(Entity.Id)).ValueGeneratedNever();
+
+            if (typeof(ContentEntity).IsAssignableFrom(type.ClrType))
+                builder.Entity(type.ClrType).Property(nameof(ContentEntity.RowVersion)).IsRowVersion();
+            if (typeof(IHasSeo).IsAssignableFrom(type.ClrType))
+                builder.Entity(type.ClrType).OwnsOne(typeof(SeoMeta), nameof(IHasSeo.Seo), seo => seo.ToJson());
+            if (typeof(ContentEntity).IsAssignableFrom(type.ClrType))
+                builder.Entity(type.ClrType).HasIndex(nameof(ContentEntity.Status));
+        }
     }
 
     private static void ApplySoftDeleteFilters(ModelBuilder builder)

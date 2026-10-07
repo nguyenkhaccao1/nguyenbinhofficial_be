@@ -26,6 +26,12 @@ internal sealed class MediaVariantProcessor(
     {
         var media = await db.MediaFiles.FirstOrDefaultAsync(m => m.Id == mediaId, ct);
         if (media is null || media.Kind != MediaKind.Image || !UploadPolicy.IsResizableImage(media.Extension)) return;
+        if (storage.SupportsTransformations)
+        {
+            media.ProcessingState = MediaProcessingState.Done;
+            await db.SaveChangesAsync(ct);
+            return;
+        }
 
         try
         {
@@ -39,17 +45,17 @@ internal sealed class MediaVariantProcessor(
             }
 
             var variants = new List<MediaVariant>();
-            var baseKey = media.StorageKey[..^media.Extension.Length];
+            var baseKey = media.StorageKey[..media.StorageKey.LastIndexOf('.')];
             foreach (var width in TargetWidths(media.Width ?? 0))
             foreach (var format in Formats)
             {
                 ct.ThrowIfCancellationRequested();
                 var encoded = images.Resize(bytes, width, format);
                 var key = $"{baseKey}-w{width}.{format}";
-                await storage.SaveAsync(key, new MemoryStream(encoded.Bytes), media.IsPrivate, ct);
+                var stored = await storage.SaveAsync(key, new MemoryStream(encoded.Bytes), media.IsPrivate, ct);
                 variants.Add(new MediaVariant
                 {
-                    Format = format, Width = encoded.Width, Height = encoded.Height, StorageKey = key,
+                    Format = format, Width = encoded.Width, Height = encoded.Height, StorageKey = stored.Key,
                     SizeBytes = encoded.Bytes.LongLength,
                 });
             }

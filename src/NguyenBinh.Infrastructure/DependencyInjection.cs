@@ -28,10 +28,13 @@ public static class DependencyInjection
         services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, sql =>
         {
             sql.EnableRetryOnFailure(maxRetryCount: 5);
+            // Noi dung co nhieu bang con (features, media, links...) → tach query tranh bung no tich Descartes.
+            sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
             sql.MigrationsAssembly(typeof(AppDbContext).Assembly.FullName);
         }));
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
         services.AddScoped<DbInitializer>();
+        services.AddScoped<ContentSeeder>();
         services.Configure<SeedOptions>(configuration.GetSection(SeedOptions.Section));
 
         // Identity (khong dung cookie auth cua Identity — admin dung JWT).
@@ -74,14 +77,25 @@ public static class DependencyInjection
         services.AddSingleton<ICacheService, DistributedCacheService>();
 
         services.Configure<StorageOptions>(configuration.GetSection(StorageOptions.Section));
-        services.AddSingleton<IFileStorage>(sp =>
+        services.Configure<ImageKitOptions>(configuration.GetSection(ImageKitOptions.Section));
+        services.AddSingleton(sp =>
             new LocalFileStorage(sp.GetRequiredService<IOptions<StorageOptions>>(), environment.ContentRootPath));
+        if (string.Equals(storageOptions.Provider, "ImageKit", StringComparison.OrdinalIgnoreCase))
+        {
+            services.AddHttpClient<ImageKitFileStorage>(c => c.Timeout = TimeSpan.FromMinutes(5));
+            services.AddSingleton<IFileStorage>(sp => sp.GetRequiredService<ImageKitFileStorage>());
+        }
+        else
+        {
+            services.AddSingleton<IFileStorage>(sp => sp.GetRequiredService<LocalFileStorage>());
+        }
 
         services.AddSingleton<IImageProcessor, VipsImageProcessor>();
         services.AddSingleton<IMalwareScanner, NoopMalwareScanner>();
         services.AddSingleton<MediaProcessingQueue>();
         services.AddSingleton<IMediaProcessingQueue>(sp => sp.GetRequiredService<MediaProcessingQueue>());
         services.AddHostedService<MediaProcessingWorker>();
+        services.AddHostedService<NguyenBinh.Infrastructure.Content.ScheduledPublishWorker>();
 
         return services;
     }

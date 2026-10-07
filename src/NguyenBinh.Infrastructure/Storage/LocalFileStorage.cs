@@ -7,10 +7,13 @@ public sealed class StorageOptions
 {
     public const string Section = "Storage";
 
-    /// <summary>Thu muc goc; tuong doi so voi ContentRoot cua API.</summary>
+    /// <summary>"Local" (mac dinh) hoac "ImageKit".</summary>
+    public string Provider { get; set; } = "Local";
+
+    /// <summary>Thu muc goc tren dia; tuong doi so voi ContentRoot cua API.</summary>
     public string RootPath { get; set; } = "storage";
 
-    /// <summary>Origin phuc vu media (vd https://cdn.nguyenbinhofficial.com.vn). Rong = cung domain.</summary>
+    /// <summary>Origin phuc vu media local (vd http://localhost:5080). Rong = cung domain.</summary>
     public string PublicBaseUrl { get; set; } = string.Empty;
 
     public string PublicRequestPath { get; set; } = "/media";
@@ -20,8 +23,8 @@ public sealed class StorageOptions
 }
 
 /// <summary>
-/// Luu file tren dia: public/ duoc phuc vu tinh qua /media (cache 1 nam, immutable — key khong bao gio tai su dung),
-/// private/ chi doc qua API co kiem tra quyen.
+/// Luu file tren dia: public/ phuc vu tinh qua /media (cache 1 nam, immutable — khoa khong tai su dung),
+/// private/ chi doc qua API co kiem tra quyen. Dung cho dev/test va file private o production.
 /// </summary>
 internal sealed class LocalFileStorage : IFileStorage
 {
@@ -38,12 +41,15 @@ internal sealed class LocalFileStorage : IFileStorage
         Directory.CreateDirectory(_privateRoot);
     }
 
-    public async Task SaveAsync(string key, Stream content, bool isPrivate, CancellationToken ct = default)
+    public bool SupportsTransformations => false;
+
+    public async Task<StoredFile> SaveAsync(string key, Stream content, bool isPrivate, CancellationToken ct = default)
     {
         var path = Resolve(key, isPrivate);
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);
         await using var file = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 81920, true);
         await content.CopyToAsync(file, ct);
+        return new StoredFile(key, null);
     }
 
     public Task<Stream?> OpenReadAsync(string key, bool isPrivate, CancellationToken ct = default)
@@ -55,15 +61,31 @@ internal sealed class LocalFileStorage : IFileStorage
         return Task.FromResult(stream);
     }
 
-    public Task DeleteAsync(string key, bool isPrivate, CancellationToken ct = default)
+    public Task DeleteAsync(string key, string? providerFileId, bool isPrivate, CancellationToken ct = default)
     {
         var path = Resolve(key, isPrivate);
         if (File.Exists(path)) File.Delete(path);
         return Task.CompletedTask;
     }
 
+    public Task<StoredFile> MoveAsync(string key, string newKey, string? providerFileId, bool isPrivate,
+        CancellationToken ct = default)
+    {
+        var source = Resolve(key, isPrivate);
+        var target = Resolve(newKey, isPrivate);
+        if (File.Exists(source))
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(target)!);
+            File.Move(source, target, overwrite: false);
+        }
+
+        return Task.FromResult(new StoredFile(newKey, null));
+    }
+
     public string GetPublicUrl(string key) =>
         $"{_options.PublicBaseUrl.TrimEnd('/')}{_options.PublicRequestPath}/{key}";
+
+    public string? GetTransformedUrl(string key, int width, string format) => null;
 
     /// <summary>Chan path traversal: duong dan cuoi cung bat buoc nam trong thu muc goc.</summary>
     private string Resolve(string key, bool isPrivate)

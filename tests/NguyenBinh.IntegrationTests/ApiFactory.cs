@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -47,6 +48,14 @@ public sealed class ApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
 
     private static string ConnectionString(string database) =>
         $"Server=(localdb)\\MSSQLLocalDB;Database={database};Trusted_Connection=True;TrustServerCertificate=True";
+
+    protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder) =>
+        // Giong Development: phat hien som service khong dung duoc (thieu dang ky, sai lifetime).
+        builder.UseDefaultServiceProvider(o =>
+        {
+            o.ValidateOnBuild = true;
+            o.ValidateScopes = true;
+        });
 
     public Task InitializeAsync()
     {

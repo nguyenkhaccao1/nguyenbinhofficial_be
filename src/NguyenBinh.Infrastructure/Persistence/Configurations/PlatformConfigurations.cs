@@ -34,7 +34,8 @@ internal sealed class MediaFileConfiguration : IEntityTypeConfiguration<MediaFil
         b.ToTable("MediaFiles");
         b.Property(x => x.FileName).HasMaxLength(255);
         b.Property(x => x.OriginalName).HasMaxLength(255);
-        b.Property(x => x.StorageKey).HasMaxLength(300).IsUnicode(false);
+        b.Property(x => x.StorageKey).HasMaxLength(400).IsUnicode(false);
+        b.Property(x => x.StorageFileId).HasMaxLength(100).IsUnicode(false);
         b.Property(x => x.MimeType).HasMaxLength(150).IsUnicode(false);
         b.Property(x => x.Extension).HasMaxLength(16).IsUnicode(false);
         b.Property(x => x.Title).HasMaxLength(255);

@@ -18,8 +18,12 @@ public class MediaFile : AuditableEntity
     public string FileName { get; set; } = string.Empty;
     public string OriginalName { get; set; } = string.Empty;
 
-    /// <summary>Khoa luu tru (vd "2026/10/{id}.jpg"). URL duoc tinh tu khoa luc doc de doi CDN khong phai sua DB.</summary>
+    /// <summary>Khoa luu tru dang cay (vd "nguyenbinhofficial/du-an/pk/dashboard-k3f9qa.png"). URL tinh tu khoa luc doc.</summary>
     public string StorageKey { get; set; } = string.Empty;
+
+    /// <summary>Id file phia nha cung cap luu tru (ImageKit fileId) — can cho xoa/di chuyen.</summary>
+    public string? StorageFileId { get; set; }
+
     public string MimeType { get; set; } = string.Empty;
     public string Extension { get; set; } = string.Empty;
     public MediaKind Kind { get; set; }

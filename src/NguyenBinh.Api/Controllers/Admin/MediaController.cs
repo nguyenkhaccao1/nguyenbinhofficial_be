@@ -23,19 +23,22 @@ public sealed class MediaController(IMediaService media, IAuthorizationService a
     public async Task<ActionResult<ApiResponse<MediaDetailDto>>> Get(Guid id, CancellationToken ct) =>
         Success(await media.GetAsync(id, ct));
 
-    /// <summary>Upload nhieu file (multipart, field "files"). Moi file tra ket qua rieng (thanh cong/loi).</summary>
+    /// <summary>
+    /// Upload nhieu file (multipart, field "files"). Chon thu muc bang folderId, hoac folderPath theo ten hien thi
+    /// (vd "Dự án/PerfectKey Workforce" — tu tao cay neu chua co). Moi file tra ket qua rieng.
+    /// </summary>
     [HttpPost("upload")]
     [HasPermission(Permissions.Media.Upload)]
     [RequestSizeLimit(MaxRequestBytes)]
     [RequestFormLimits(MultipartBodyLengthLimit = MaxRequestBytes)]
     public async Task<ActionResult<ApiResponse<IReadOnlyList<UploadResultItem>>>> Upload(
-        [FromForm] List<IFormFile> files, [FromForm] Guid? folderId, CancellationToken ct)
+        [FromForm] List<IFormFile> files, [FromForm] Guid? folderId, [FromForm] string? folderPath, CancellationToken ct)
     {
         if (files.Count == 0) throw new BusinessValidationException("files", "Chọn ít nhất 1 file.");
         if (files.Count > 50) throw new BusinessValidationException("files", "Tối đa 50 file mỗi lần tải lên.");
 
         var uploads = files.Select(f => new UploadFile(f.FileName, f.Length, f.OpenReadStream)).ToList();
-        var results = await media.UploadAsync(uploads, folderId, ct);
+        var results = await media.UploadAsync(uploads, folderId, folderPath, ct);
         var failed = results.Count(r => !r.Success);
         return Success(results, failed == 0 ? $"Đã tải lên {results.Count} file." : $"{failed}/{results.Count} file bị từ chối.");
     }

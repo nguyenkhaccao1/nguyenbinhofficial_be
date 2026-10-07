@@ -31,17 +31,6 @@ public interface ITokenService
 
 public sealed record AccessToken(string Token, DateTimeOffset ExpiresAt);
 
-/// <summary>Luu tru file (Local disk → S3/Azure Blob sau nay). Key dang "2026/10/{id}.jpg".</summary>
-public interface IFileStorage
-{
-    Task SaveAsync(string key, Stream content, bool isPrivate, CancellationToken ct = default);
-    Task<Stream?> OpenReadAsync(string key, bool isPrivate, CancellationToken ct = default);
-    Task DeleteAsync(string key, bool isPrivate, CancellationToken ct = default);
-
-    /// <summary>URL public (CDN-ready) cho file khong private.</summary>
-    string GetPublicUrl(string key);
-}
-
 public interface IImageProcessor
 {
     /// <summary>Doc kich thuoc anh (da tinh xoay EXIF). Null neu khong doc duoc.</summary>

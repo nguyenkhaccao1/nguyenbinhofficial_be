@@ -28,6 +28,7 @@ public sealed class DbInitializer(
     AppDbContext db,
     RoleManager<AppRole> roleManager,
     UserManager<AppUser> userManager,
+    ContentSeeder contentSeeder,
     IOptions<SeedOptions> seedOptions,
     ILogger<DbInitializer> logger)
 {
@@ -53,6 +54,7 @@ public sealed class DbInitializer(
         await SeedRolesAsync(ct);
         await SeedAdminAsync();
         await SeedSettingsAsync(ct);
+        await contentSeeder.SeedAsync(ct);
     }
 
     private async Task SyncPermissionsAsync(CancellationToken ct)

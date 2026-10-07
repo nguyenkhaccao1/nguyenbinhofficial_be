@@ -105,8 +105,10 @@ public sealed class AuthorizationTests(ApiFactory factory)
         endpoints.Should().NotBeEmpty();
         endpoints.Should().AllSatisfy(e =>
         {
-            e.Metadata.GetOrderedMetadata<HasPermissionAttribute>().Should()
-                .NotBeEmpty($"{e.DisplayName} must have [HasPermission]");
+            var hasPermission = e.Metadata.GetOrderedMetadata<HasPermissionAttribute>().Count > 0
+                                || (e.Metadata.GetMetadata<ContentPermissionAttribute>() is not null
+                                    && e.Metadata.GetMetadata<PermissionModuleAttribute>() is not null);
+            hasPermission.Should().BeTrue($"{e.DisplayName} must have [HasPermission] or [ContentPermission]+[PermissionModule]");
             e.Metadata.GetMetadata<IAllowAnonymous>().Should().BeNull($"{e.DisplayName} must not allow anonymous");
         });
     }

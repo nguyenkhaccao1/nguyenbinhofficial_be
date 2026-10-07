@@ -29,5 +29,7 @@ public interface IAppDbContext
     DbSet<ContentVersion> ContentVersions { get; }
     DbSet<ContentTranslation> ContentTranslations { get; }
 
+    DbSet<TEntity> Set<TEntity>() where TEntity : class;
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }

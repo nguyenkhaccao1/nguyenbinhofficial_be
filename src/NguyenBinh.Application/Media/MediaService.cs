@@ -1,6 +1,7 @@
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NguyenBinh.Application.Common.Abstractions;
 using NguyenBinh.Application.Common.Exceptions;
 using NguyenBinh.Application.Common.Paging;
@@ -13,7 +14,8 @@ public interface IMediaService
 {
     Task<PagedResult<MediaDto>> ListAsync(MediaListQuery query, CancellationToken ct = default);
     Task<MediaDetailDto> GetAsync(Guid id, CancellationToken ct = default);
-    Task<IReadOnlyList<UploadResultItem>> UploadAsync(IReadOnlyList<UploadFile> files, Guid? folderId,
+    /// <param name="folderPath">Duong dan thu muc theo ten hien thi (vd "Dự án/PerfectKey"), tu tao neu chua co.</param>
+    Task<IReadOnlyList<UploadResultItem>> UploadAsync(IReadOnlyList<UploadFile> files, Guid? folderId, string? folderPath,
         CancellationToken ct = default);
     Task<MediaDto> UpdateAsync(Guid id, UpdateMediaRequest request, CancellationToken ct = default);
     Task<MediaDto> CropAsync(Guid id, CropMediaRequest request, CancellationToken ct = default);
@@ -32,9 +34,11 @@ internal sealed class MediaService(
     IImageProcessor images,
     IMalwareScanner malwareScanner,
     IMediaProcessingQueue processingQueue,
-    TimeProvider clock,
+    IOptions<MediaOptions> mediaOptions,
     ILogger<MediaService> logger) : IMediaService
 {
+    private MediaOptions Options => mediaOptions.Value;
+
     private static readonly SortMap<MediaFile> Sorts = new SortMap<MediaFile>()
         .Add("fileName", m => m.FileName)
         .Add("sizeBytes", m => m.SizeBytes)
@@ -68,29 +72,39 @@ internal sealed class MediaService(
     }
 
     public async Task<IReadOnlyList<UploadResultItem>> UploadAsync(IReadOnlyList<UploadFile> files, Guid? folderId,
-        CancellationToken ct = default)
+        string? folderPath, CancellationToken ct = default)
     {
         if (folderId is { } fid && !await db.MediaFolders.AnyAsync(f => f.Id == fid, ct))
             throw new BusinessValidationException("folderId", "Thư mục không tồn tại.");
+        folderId ??= await MediaKeys.EnsureFolderPathAsync(db, folderPath, ct);
+        var folderSlugs = await MediaKeys.FolderSlugsAsync(db, folderId, ct);
 
         var results = new List<UploadResultItem>(files.Count);
         foreach (var file in files)
         {
             try
             {
-                var media = await UploadOneAsync(file, folderId, ct);
+                var media = await UploadOneAsync(file, folderId, folderSlugs, ct);
                 results.Add(new UploadResultItem(file.FileName, true, ToDto(media, 0), null));
             }
             catch (UploadRejectedException ex)
             {
                 results.Add(new UploadResultItem(file.FileName, false, null, ex.Message));
             }
+            catch (Exception ex) when (ex is not OperationCanceledException && ex is not AppException)
+            {
+                // Loi kho luu tru (mang, CDN) chi lam hong file nay, cac file khac van tiep tuc.
+                logger.LogError(ex, "Upload {FileName} failed", file.FileName);
+                results.Add(new UploadResultItem(file.FileName, false, null,
+                    "Không lưu được file lên kho lưu trữ. Vui lòng thử lại."));
+            }
         }
 
         return results;
     }
 
-    private async Task<MediaFile> UploadOneAsync(UploadFile file, Guid? folderId, CancellationToken ct)
+    private async Task<MediaFile> UploadOneAsync(UploadFile file, Guid? folderId, IReadOnlyList<string> folderSlugs,
+        CancellationToken ct)
     {
         var originalName = Path.GetFileName(file.FileName);
         var rule = UploadPolicy.Find(originalName)
@@ -111,16 +125,13 @@ internal sealed class MediaService(
             if (!await malwareScanner.IsCleanAsync(s, originalName, ct))
                 throw new UploadRejectedException("File không an toàn.");
 
-        var id = Guid.CreateVersion7();
-        var now = clock.GetUtcNow();
         var extension = rule.Extension.ToLowerInvariant() == ".jpeg" ? ".jpg" : rule.Extension.ToLowerInvariant();
         var media = new MediaFile
         {
-            Id = id,
             FolderId = folderId,
             OriginalName = originalName,
             FileName = Path.GetFileNameWithoutExtension(originalName),
-            StorageKey = $"{now:yyyy}/{now:MM}/{id:N}{extension}",
+            StorageKey = MediaKeys.Build(Options, folderSlugs, originalName, extension),
             MimeType = rule.MimeType,
             Extension = extension,
             Kind = rule.Kind,
@@ -144,17 +155,18 @@ internal sealed class MediaService(
             if (UploadPolicy.IsResizableImage(extension))
             {
                 media.BlurDataUrl = TryBlur(bytes);
-                media.ProcessingState = MediaProcessingState.Pending;
+                // CDN co resize/doi dinh dang (ImageKit) → khong can tao bien the tai server.
+                media.ProcessingState = storage.SupportsTransformations ? MediaProcessingState.Done : MediaProcessingState.Pending;
             }
 
-            await storage.SaveAsync(media.StorageKey, new MemoryStream(bytes), false, ct);
+            Store(media, await storage.SaveAsync(media.StorageKey, new MemoryStream(bytes), false, ct));
         }
         else
         {
             await using (var s = file.OpenReadStream())
                 media.Checksum = Convert.ToHexString(await SHA256.HashDataAsync(s, ct));
             await using (var s = file.OpenReadStream())
-                await storage.SaveAsync(media.StorageKey, s, false, ct);
+                Store(media, await storage.SaveAsync(media.StorageKey, s, false, ct));
         }
 
         db.MediaFiles.Add(media);
@@ -172,12 +184,13 @@ internal sealed class MediaService(
         if (request.FolderId is { } fid && !await db.MediaFolders.AnyAsync(f => f.Id == fid, ct))
             throw new BusinessValidationException("folderId", "Thư mục không tồn tại.");
 
+        if (media.FolderId != request.FolderId) await MoveAsync(media, request.FolderId, ct);
+
         media.FileName = request.FileName.Trim();
         media.Title = Clean(request.Title);
         media.Alt = Clean(request.Alt);
         media.Caption = Clean(request.Caption);
         media.Tags = request.Tags?.Select(t => t.Trim()).Where(t => t.Length > 0).Distinct().ToList() ?? [];
-        media.FolderId = request.FolderId;
         await db.SaveChangesAsync(ct);
 
         return ToDto(media, await db.MediaUsages.CountAsync(u => u.MediaId == id, ct));
@@ -195,15 +208,13 @@ internal sealed class MediaService(
         var cropped = images.Crop(bytes, request.X, request.Y, request.Width, request.Height,
             source.Extension.TrimStart('.'));
 
-        var now = clock.GetUtcNow();
-        var newId = Guid.CreateVersion7();
         var media = new MediaFile
         {
-            Id = newId,
             FolderId = source.FolderId,
             OriginalName = source.OriginalName,
             FileName = $"{source.FileName}-crop",
-            StorageKey = $"{now:yyyy}/{now:MM}/{newId:N}{source.Extension}",
+            StorageKey = MediaKeys.Build(Options, await MediaKeys.FolderSlugsAsync(db, source.FolderId, ct),
+                $"{source.FileName}-crop", source.Extension),
             MimeType = source.MimeType,
             Extension = source.Extension,
             Kind = MediaKind.Image,
@@ -216,13 +227,13 @@ internal sealed class MediaService(
             Tags = [.. source.Tags],
             Checksum = Convert.ToHexString(SHA256.HashData(cropped.Bytes)),
             BlurDataUrl = TryBlur(cropped.Bytes),
-            ProcessingState = MediaProcessingState.Pending,
+            ProcessingState = storage.SupportsTransformations ? MediaProcessingState.Done : MediaProcessingState.Pending,
         };
 
-        await storage.SaveAsync(media.StorageKey, new MemoryStream(cropped.Bytes), false, ct);
+        Store(media, await storage.SaveAsync(media.StorageKey, new MemoryStream(cropped.Bytes), false, ct));
         db.MediaFiles.Add(media);
         await db.SaveChangesAsync(ct);
-        await processingQueue.EnqueueAsync(media.Id, ct);
+        if (media.ProcessingState == MediaProcessingState.Pending) await processingQueue.EnqueueAsync(media.Id, ct);
         return ToDto(media, 0);
     }
 
@@ -253,8 +264,12 @@ internal sealed class MediaService(
         {
             if (request.FolderId is { } fid && !await db.MediaFolders.AnyAsync(f => f.Id == fid, ct))
                 throw new BusinessValidationException("folderId", "Thư mục không tồn tại.");
-            foreach (var m in items) m.FolderId = request.FolderId;
-            await db.SaveChangesAsync(ct);
+            foreach (var m in items.Where(m => m.FolderId != request.FolderId))
+            {
+                await MoveAsync(m, request.FolderId, ct);
+                await db.SaveChangesAsync(ct); // luu tung file: file sau loi thi file truoc van dung vi tri
+            }
+
             return;
         }
 
@@ -365,12 +380,61 @@ internal sealed class MediaService(
 
     private static string? Clean(string? value) => string.IsNullOrWhiteSpace(value) ? null : value.Trim();
 
+    private static void Store(MediaFile media, StoredFile stored)
+    {
+        media.StorageKey = stored.Key;
+        media.StorageFileId = stored.ProviderFileId;
+    }
+
+    /// <summary>Chuyen file sang thu muc moi tren kho luu tru de cay thu muc luon khop voi thu vien.</summary>
+    private async Task MoveAsync(MediaFile media, Guid? folderId, CancellationToken ct)
+    {
+        var newKey = MediaKeys.Relocate(Options, media.StorageKey, await MediaKeys.FolderSlugsAsync(db, folderId, ct));
+        if (newKey != media.StorageKey)
+        {
+            try
+            {
+                Store(media, await storage.MoveAsync(media.StorageKey, newKey, media.StorageFileId, media.IsPrivate, ct));
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException && ex is not AppException)
+            {
+                logger.LogError(ex, "Move media {MediaId} failed", media.Id);
+                throw new BusinessValidationException("folderId",
+                    "Không di chuyển được file trên kho lưu trữ. Vui lòng thử lại.");
+            }
+
+            // Bien the tao tai server nam o vi tri cu → tao lai.
+            if (media.Variants.Count > 0)
+            {
+                media.Variants = [];
+                media.ProcessingState = MediaProcessingState.Pending;
+                await processingQueue.EnqueueAsync(media.Id, ct);
+            }
+        }
+
+        media.FolderId = folderId;
+    }
+
+    private IReadOnlyList<MediaVariantDto> VariantsOf(MediaFile m)
+    {
+        if (m.Kind != MediaKind.Image || m.IsPrivate) return [];
+        if (!storage.SupportsTransformations || !UploadPolicy.IsResizableImage(m.Extension))
+            return m.Variants.Select(v => new MediaVariantDto(v.Format, v.Width, v.Height, storage.GetPublicUrl(v.StorageKey),
+                v.SizeBytes)).ToList();
+
+        // CDN resize theo URL: cung bo do rong voi bien the server-side (dung luong chua biet truoc → 0).
+        return MediaVariantProcessor.TargetWidths(m.Width ?? 0)
+            .SelectMany(w => MediaVariantProcessor.Formats.Select(f => new MediaVariantDto(f, w,
+                m.Width is > 0 && m.Height is > 0 ? (int)Math.Round(m.Height.Value * (w / (double)m.Width.Value)) : 0,
+                storage.GetTransformedUrl(m.StorageKey, w, f)!, 0)))
+            .ToList();
+    }
+
     internal MediaDto ToDto(MediaFile m, int usageCount) => new(
         m.Id, m.FolderId, m.FileName, m.OriginalName,
         m.IsPrivate ? null : storage.GetPublicUrl(m.StorageKey),
         m.MimeType, m.Extension, m.Kind, m.SizeBytes, m.Width, m.Height, m.Title, m.Alt, m.Caption, m.Tags,
-        m.Variants.Select(v => new MediaVariantDto(v.Format, v.Width, v.Height, storage.GetPublicUrl(v.StorageKey),
-            v.SizeBytes)).ToList(),
+        VariantsOf(m),
         m.ProcessingState, m.BlurDataUrl, m.IsPrivate, usageCount, m.CreatedAt, m.UpdatedAt);
 
     private sealed class UploadRejectedException(string message) : Exception(message);
