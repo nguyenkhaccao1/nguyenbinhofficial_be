@@ -11,7 +11,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 
 domains=()
 for host in nguyenbinhofficial.com.vn www.nguyenbinhofficial.com.vn; do
-  ip="$(getent ahostsv4 "$host" | awk 'NR==1{print $1}')"
+  ip="$(getent ahostsv4 "$host" | awk 'NR==1{print $1}' || true)"
   if [[ "$ip" == "$SERVER_IP" ]]; then
     domains+=("-d" "$host"); echo "✔ $host → $ip"
   else
