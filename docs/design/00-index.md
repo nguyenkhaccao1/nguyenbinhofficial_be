@@ -31,7 +31,7 @@ Tài liệu thiết kế bắt buộc trước khi triển khai (mục 75 của 
 | Đa ngôn ngữ | Nội dung mặc định `vi` nằm trong cột chính; bản dịch trong `ContentTranslations` (EntityType, EntityId, Locale, Field, Value). Chuỗi UI public nằm trong file i18n ở frontend, không nằm trong DB | Mục 69. |
 | Phân loại dự án | `ContentTypes` (đa giá trị), `CommercialType`, `ProjectRoles` (đa giá trị), `OwnershipType` + cờ hiển thị `CanShow*` | Mục 5, 25 — không bao giờ tự gọi dự án khách hàng là "Sản phẩm của Nguyên Bình". |
 | Page Builder | `Pages → PageSections → PageBlocks`; block có `Type` + `Data` (JSON, validate theo schema của từng block) + `Settings` | Mục 22, mở rộng thêm block chỉ cần đăng ký 1 schema (BE) + 1 renderer (FE) + 1 editor (admin). |
-| Ảnh | Pipeline libvips (NetVips) sinh biến thể WebP + AVIF nhiều kích thước; lưu qua `IFileStorage` (Local → S3/Azure Blob) | Mục 26, 31. |
+| Ảnh | Production: ImageKit (CDN resize + WebP/AVIF qua URL), khoá dạng cây thư mục + tên file rõ ràng. Dev/test: đĩa local + libvips sinh biến thể. File private luôn ở local | Mục 26, 31. |
 | Cache | Output cache + `IDistributedCache` (Memory ở Dev, Redis ở SIT/UAT/Prod); web SSR trả `Cache-Control: s-maxage` cho CDN | Mục 31. |
 
 ## Trạng thái
@@ -40,4 +40,5 @@ Tài liệu thiết kế bắt buộc trước khi triển khai (mục 75 của 
 |-------|-----------|
 | 0 — Thiết kế | ✅ Tài liệu này |
 | 1 — Foundation | ✅ Backend (auth, RBAC, media, settings, audit) + Admin (đăng nhập, người dùng, vai trò, media, cấu hình, nhật ký) + khung web SSR. 74 test backend, 16 test frontend |
-| 2 — CMS | Chưa bắt đầu |
+| 2 — CMS | ✅ Dự án (phân loại + sở hữu), sản phẩm, dịch vụ, blog, page builder, danh mục, thư viện, menu; seed 9 dự án; ảnh trên ImageKit. Đã deploy Docker lên server |
+| 3 — Website public | Chưa bắt đầu |
