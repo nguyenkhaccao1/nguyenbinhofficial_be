@@ -82,8 +82,7 @@
         "overview": "<p>PerfectKey Workforce là hệ thống quản lý nguồn nhân lực cho khách sạn trong hệ sinh thái PerfectKey: hồ sơ nhân sự, tổ chức, ca làm, chấm công, xếp lịch và tính lương. Người dùng đăng nhập bằng tài khoản PKM Identity dùng chung của hệ sinh thái.</p>",
         "architecture": "<p>Backend ASP.NET Core (.NET 9) theo Clean Architecture 4 lớp (Domain, Application, Infrastructure, API), dữ liệu trên SQL Server qua Entity Framework Core. Web quản trị viết bằng React + TypeScript; ứng dụng di động viết bằng Flutter. Web và mobile dùng <strong>chung một hợp đồng API</strong> (client sinh từ OpenAPI), không tách API riêng cho mobile.</p>",
         "canShowLiveUrl": false,
-        "isFeatured": true,
-        "featuredOrder": 4
+        "isFeatured": false
       },
       "technologies": [".NET", "ASP.NET Core", "SQL Server", "React", "TypeScript", "Flutter"],
       "media": [
@@ -117,5 +116,6 @@
         { "file": "nam-viet-hung-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Hệ thống Nam Việt Hùng trên điện thoại" }
       ]
     }
-  ]
+  ],
+  "publishPages": [{ "path": "/" }]
 }

@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NguyenBinh.Application.Common.Exceptions;
 using NguyenBinh.Application.Content.Common;
+using NguyenBinh.Application.Content.Pages;
 using NguyenBinh.Application.Content.Projects;
 using NguyenBinh.Application.Media;
 using NguyenBinh.Domain.Common;
@@ -22,6 +23,7 @@ namespace NguyenBinh.Infrastructure.Persistence;
 public sealed class ShowcaseImporter(
     AppDbContext db,
     IContentAdminService<Project, ProjectListItem, ProjectInput> projects,
+    IContentAdminService<Page, PageListItem, PageInput> pages,
     IMediaService media,
     ILogger<ShowcaseImporter> logger)
 {
@@ -30,7 +32,9 @@ public sealed class ShowcaseImporter(
     private sealed record ProjectSpec(string Slug, string Folder, bool Publish, JsonObject? Set, List<string>? Technologies,
         List<MediaSpec>? Media);
 
-    private sealed record ShowcaseFile(List<ProjectSpec> Projects);
+    private sealed record PageSpec(string Path);
+
+    private sealed record ShowcaseFile(List<ProjectSpec> Projects, List<PageSpec>? PublishPages);
 
     public async Task<int> ImportAsync(string directory, CancellationToken ct = default)
     {
@@ -55,6 +59,23 @@ public sealed class ShowcaseImporter(
             {
                 failures++;
                 logger.LogError(ex, "{Slug}: nhap that bai", spec.Slug);
+            }
+        }
+
+        // Trang (vd trang chu seed san) chi xuat ban sau khi da co du lieu that cho cac block dong.
+        foreach (var page in file.PublishPages ?? [])
+        {
+            var pageEntity = await db.Set<Page>().AsNoTracking().Where(p => p.Path == page.Path)
+                .Select(p => new { p.Id, p.Status }).FirstOrDefaultAsync(ct);
+            if (pageEntity is null)
+            {
+                failures++;
+                logger.LogError("Khong co trang {Path}", page.Path);
+            }
+            else if (pageEntity.Status != ContentStatus.Published)
+            {
+                await pages.PublishAsync(pageEntity.Id, ct);
+                logger.LogInformation("Trang {Path}: da xuat ban", page.Path);
             }
         }
 
