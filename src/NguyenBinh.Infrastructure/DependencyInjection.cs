@@ -35,6 +35,7 @@ public static class DependencyInjection
         services.AddScoped<IAppDbContext>(sp => sp.GetRequiredService<AppDbContext>());
         services.AddScoped<DbInitializer>();
         services.AddScoped<ContentSeeder>();
+        services.AddScoped<ShowcaseImporter>();
         services.Configure<SeedOptions>(configuration.GetSection(SeedOptions.Section));
 
         // Identity (khong dung cookie auth cua Identity — admin dung JWT).

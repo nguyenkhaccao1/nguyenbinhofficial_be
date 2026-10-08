@@ -1,0 +1,121 @@
+{
+  "projects": [
+    {
+      "slug": "a-smart",
+      "folder": "Dự án/A-Smart",
+      "publish": true,
+      "set": {
+        "shortDescription": "Website thương mại điện tử cho hệ thống cửa hàng điện thoại A-Smart (Đà Nẵng): danh mục sản phẩm theo hãng, xem giá và tồn kho theo khu vực, flash sale và giỏ hàng trực tuyến.",
+        "overview": "<p>A-Smart là cửa hàng mua bán, sửa chữa điện thoại tại Đà Nẵng. Website <strong>a-smart.vn</strong> là kênh bán hàng trực tuyến, trình bày toàn bộ sản phẩm đang kinh doanh: điện thoại, TV, iPad và phụ kiện.</p>",
+        "solution": "<ul><li>Trang chủ với banner khuyến mãi dạng trình chiếu và lối tắt tới các nhóm sản phẩm chính (Điện thoại, TV, iPad, Phụ kiện).</li><li>Khối <strong>Flash Sale</strong> có đồng hồ đếm ngược, giá gốc, giá giảm, phần trăm giảm và trạng thái <em>đã bán / còn hàng</em> của từng sản phẩm.</li><li>Khu vực sản phẩm theo hãng (iPhone, Samsung, Xiaomi, TV…) với bộ lọc nhanh theo dòng máy và nút “Xem thêm sản phẩm”.</li><li>Chọn khu vực để <strong>xem giá, tồn kho</strong>; ô tìm kiếm sản phẩm; giỏ hàng.</li><li>Nút liên hệ nổi và giao diện responsive cho điện thoại.</li></ul>",
+        "isFeatured": true,
+        "featuredOrder": 1
+      },
+      "media": [
+        { "file": "a-smart-trang-chu-desktop.jpg", "kind": "DESKTOP", "caption": "Trang chủ a-smart.vn", "alt": "Giao diện trang chủ website A-Smart trên máy tính", "cover": true },
+        { "file": "a-smart-danh-muc-iphone.jpg", "kind": "DESKTOP", "caption": "Khu vực sản phẩm iPhone với bộ lọc theo dòng máy", "alt": "Danh sách sản phẩm iPhone trên website A-Smart" },
+        { "file": "a-smart-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Website A-Smart trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "com-thi-no",
+      "folder": "Dự án/Cơm Thị Nở",
+      "publish": true,
+      "set": {
+        "ownershipType": "CLIENT_OWNED",
+        "projectRoles": ["DEVELOPER"],
+        "publicCreditText": "Nguyên Bình thiết kế và phát triển website theo yêu cầu của khách hàng.",
+        "shortDescription": "Website cho quán Cơm Thị Nở (Văn Quán, Hà Đông): giới thiệu quán, thực đơn sách lật, món nổi bật, đặt cơm văn phòng/cơm đoàn và nội dung SEO local theo khu vực.",
+        "overview": "<p>Cơm Thị Nở là quán cơm quê chuẩn vị Bắc Bộ tại KĐT Văn Quán, Hà Đông, phục vụ cơm văn phòng, cơm gia đình, cơm mang về và tiệc đoàn. Website <strong>comthino.com</strong> giới thiệu quán và giúp khách đặt mâm, đặt cơm đoàn nhanh qua điện thoại, Zalo hoặc Messenger.</p>",
+        "solution": "<ul><li>Thanh thông tin trên cùng: giờ mở cửa, địa chỉ, hotline; nút <strong>Gọi đặt mâm</strong> luôn hiển thị.</li><li>Nội dung <strong>SEO local</strong> theo khu vực và nhu cầu (cơm Hà Đông, cơm Văn Quán, cơm văn phòng, cơm gia đình) cùng khối “Khu vực phục vụ”.</li><li><strong>Thực đơn sách lật</strong> có lọc theo nhóm món (gà, bò, sườn, cá, tép, đậu phụ, canh, rau…).</li><li>Khối món nổi bật có giá và nút “Liên hệ đặt”; câu chuyện thương hiệu và không gian quán.</li><li>Nút liên hệ nổi Zalo, Messenger, gọi điện; giao diện tối ưu cho điện thoại.</li></ul>",
+        "isFeatured": true,
+        "featuredOrder": 2
+      },
+      "media": [
+        { "file": "com-thi-no-gioi-thieu-quan.jpg", "kind": "DESKTOP", "caption": "Không gian quán và câu chuyện thương hiệu", "alt": "Website Cơm Thị Nở – phần giới thiệu không gian quán", "cover": true },
+        { "file": "com-thi-no-noi-dung-seo-local.jpg", "kind": "DESKTOP", "caption": "Nội dung SEO local theo khu vực Hà Đông – Văn Quán", "alt": "Nội dung giới thiệu quán cơm Hà Đông trên website Cơm Thị Nở" },
+        { "file": "com-thi-no-mon-noi-bat.jpg", "kind": "DESKTOP", "caption": "Món nổi bật có giá và nút đặt", "alt": "Khối món ăn nổi bật trên website Cơm Thị Nở" },
+        { "file": "com-thi-no-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Trang chủ trên điện thoại", "alt": "Website Cơm Thị Nở trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "tuong-quang-phat",
+      "folder": "Dự án/Tường Quang Phát",
+      "publish": true,
+      "set": {
+        "shortDescription": "Website doanh nghiệp cho Công ty TNHH Tường Quang Phát (Hà Nội): giới thiệu dịch vụ điện nhẹ, công nghệ thông tin, vệ sinh công nghiệp, tin tức, tuyển dụng và khách hàng tiêu biểu.",
+        "overview": "<p>Tường Quang Phát cung cấp dịch vụ điện nhẹ, công nghệ thông tin (bảo hành, bảo trì, IT helpdesk, quản trị hạ tầng) và vệ sinh công nghiệp. Website <strong>tuongquangphat.vn</strong> là kênh giới thiệu năng lực và tiếp nhận yêu cầu tư vấn.</p>",
+        "solution": "<ul><li>Trang chủ với banner trình chiếu và ba khối dịch vụ chính, mỗi khối dẫn tới trang chi tiết.</li><li>Chuyên mục tin tức, kiến thức CNTT và <strong>tuyển dụng</strong>.</li><li>Khu vực “Những khách hàng tiêu biểu” hiển thị logo đối tác.</li><li>Thanh liên hệ nhanh (giờ làm việc, hotline, nút “Tư vấn ngay”), hỗ trợ qua Zalo, bản đồ chỉ đường.</li><li>Giao diện responsive.</li></ul>",
+        "isFeatured": false
+      },
+      "media": [
+        { "file": "tuong-quang-phat-trang-chu-desktop.jpg", "kind": "DESKTOP", "caption": "Trang chủ tuongquangphat.vn", "alt": "Trang chủ website Tường Quang Phát", "cover": true },
+        { "file": "tuong-quang-phat-dich-vu.jpg", "kind": "DESKTOP", "caption": "Các khối dịch vụ chính", "alt": "Khối dịch vụ điện nhẹ và công nghệ thông tin trên website Tường Quang Phát" },
+        { "file": "tuong-quang-phat-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Website Tường Quang Phát trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "quan-ly-khach-san",
+      "folder": "Dự án/Perfect Key Management",
+      "publish": true,
+      "set": {
+        "shortDescription": "Perfect Key Management (PKM) – hệ thống quản lý khách sạn, nhà hàng, resort theo quy trình quốc tế: Front Office, POS nhà hàng, Back Office kế toán, trừ kho theo định lượng và kết nối hệ thống khác.",
+        "overview": "<p>Perfect Key Management là giải pháp phần mềm quản lý khách sạn, nhà hàng và khu resort, được giới thiệu tại <strong>quanlykhachsan.com</strong>. Hệ thống bao phủ nghiệp vụ lễ tân, bán hàng tại các điểm POS, kế toán và kho.</p>",
+        "solution": "<ul><li><strong>Front Office</strong>: đặt phòng (cá nhân, đoàn), xếp phòng, check-in, sơ đồ phòng, đổi phòng, thu ngân và check-out, chuyển và tách hoá đơn (routing).</li><li><strong>POS nhà hàng</strong> dùng màn hình cảm ứng; in order cho bar/bếp, màn hình bếp hiển thị và giao nhận order.</li><li><strong>Back Office</strong>: kế toán tích hợp số liệu tự động từ Front Office và POS; theo dõi công nợ 131 theo từng khách hàng; tự động tạo phiếu thu, giấy báo có; tuân theo Quyết định 48 hoặc 15 của Bộ Tài chính; nhiều bộ báo cáo tài chính trên cùng dữ liệu, báo cáo riêng cho chủ đầu tư.</li><li><strong>Kho</strong>: tự động trừ kho nhà hàng, minibar, amenities theo định lượng.</li><li><strong>PKM Interface</strong>: kết nối khoá từ, tổng đài điện thoại, TV và các hệ thống khác; housekeeping và giao diện cho khách.</li></ul>",
+        "architecture": "<p>Front Office là trung tâm của hệ thống, kết nối với POS/nhà hàng, Back Office, PKM Interface và Housekeeping. Order từ POS chuyển tới máy in bar/bếp và màn hình bếp. Hệ thống kiểm soát qua Internet (máy chủ, firewall), hỗ trợ đặt phòng trực tuyến và truy cập từ điện thoại, smart TV.</p>",
+        "isFeatured": true,
+        "featuredOrder": 3
+      },
+      "media": [
+        { "file": "perfect-key-management-trang-chu.jpg", "kind": "DESKTOP", "caption": "Website giới thiệu Perfect Key Management", "alt": "Trang chủ website Perfect Key Management", "cover": true },
+        { "file": "perfect-key-management-phan-he.jpg", "kind": "DESKTOP", "caption": "Các phân hệ: POS, Back Office, Front Office, kết nối hệ thống", "alt": "Các phân hệ của phần mềm quản lý khách sạn Perfect Key" },
+        { "file": "perfect-key-management-so-do-giai-phap.jpg", "kind": "ARCHITECTURE", "caption": "Sơ đồ giải pháp Perfect Key Management", "alt": "Sơ đồ kiến trúc giải pháp quản lý khách sạn Perfect Key Management", "architecture": true },
+        { "file": "perfect-key-management-mobile.jpg", "kind": "MOBILE", "caption": "Website trên điện thoại", "alt": "Website Perfect Key Management trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "perfectkey-workforce",
+      "folder": "Dự án/PerfectKey Workforce",
+      "publish": true,
+      "set": {
+        "shortDescription": "PerfectKey Workforce – hệ thống quản lý nhân sự, chấm công, xếp lịch và tính lương cho khách sạn, gồm ứng dụng web và ứng dụng di động dùng chung một API.",
+        "overview": "<p>PerfectKey Workforce là hệ thống quản lý nguồn nhân lực cho khách sạn trong hệ sinh thái PerfectKey: hồ sơ nhân sự, tổ chức, ca làm, chấm công, xếp lịch và tính lương. Người dùng đăng nhập bằng tài khoản PKM Identity dùng chung của hệ sinh thái.</p>",
+        "architecture": "<p>Backend ASP.NET Core (.NET 9) theo Clean Architecture 4 lớp (Domain, Application, Infrastructure, API), dữ liệu trên SQL Server qua Entity Framework Core. Web quản trị viết bằng React + TypeScript; ứng dụng di động viết bằng Flutter. Web và mobile dùng <strong>chung một hợp đồng API</strong> (client sinh từ OpenAPI), không tách API riêng cho mobile.</p>",
+        "canShowLiveUrl": false,
+        "isFeatured": true,
+        "featuredOrder": 4
+      },
+      "technologies": [".NET", "ASP.NET Core", "SQL Server", "React", "TypeScript", "Flutter"],
+      "media": [
+        { "file": "perfectkey-workforce-dang-nhap.jpg", "kind": "DESKTOP", "caption": "Đăng nhập bằng tài khoản PKM Identity", "alt": "Màn hình đăng nhập PerfectKey Workforce", "cover": true },
+        { "file": "perfectkey-workforce-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện web trên điện thoại", "alt": "PerfectKey Workforce trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "perfectkey-web",
+      "folder": "Dự án/PerfectKey Web",
+      "publish": false,
+      "set": {
+        "shortDescription": "Phiên bản web của PerfectKey Hotel Management System – hệ thống quản lý khách sạn PerfectKey.",
+        "canShowLiveUrl": false
+      },
+      "media": [
+        { "file": "perfectkey-web-dang-nhap.jpg", "kind": "DESKTOP", "caption": "Màn hình đăng nhập PerfectKey Hotel Management System", "alt": "Đăng nhập PerfectKey Hotel Management System", "cover": true },
+        { "file": "perfectkey-web-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "PerfectKey Web trên điện thoại" }
+      ]
+    },
+    {
+      "slug": "nam-viet-hung",
+      "folder": "Dự án/Nam Việt Hưng",
+      "publish": false,
+      "set": {
+        "shortDescription": "Hệ thống quản trị nội bộ (có đăng nhập) cho Công ty CP Thương mại Xây dựng Nam Việt Hùng.",
+        "canShowLiveUrl": false
+      },
+      "media": [
+        { "file": "nam-viet-hung-dang-nhap-desktop.jpg", "kind": "DESKTOP", "caption": "Màn hình đăng nhập hệ thống", "alt": "Màn hình đăng nhập hệ thống Nam Việt Hùng", "cover": true },
+        { "file": "nam-viet-hung-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Hệ thống Nam Việt Hùng trên điện thoại" }
+      ]
+    }
+  ]
+}

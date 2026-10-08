@@ -180,6 +180,17 @@ try
                 .InitializeAsync(config.GetValue("Database:MigrateOnStartup", false));
     }
 
+    // Lenh mot lan: nhap noi dung trinh bay du an (khong mo cong HTTP). Vd: dotnet NguyenBinh.Api.dll import-showcase /seed
+    if (args is ["import-showcase", var showcaseDirectory, ..])
+    {
+        await using var scope = app.Services.CreateAsyncScope();
+        var failures = await scope.ServiceProvider.GetRequiredService<NguyenBinh.Infrastructure.Persistence.ShowcaseImporter>()
+            .ImportAsync(showcaseDirectory);
+        Log.Information("import-showcase xong, {Failures} loi", failures);
+        Environment.ExitCode = failures == 0 ? 0 : 1;
+        return;
+    }
+
     // ---- Pipeline ----
     app.UseForwardedHeaders();
     app.UseMiddleware<CorrelationIdMiddleware>();
