@@ -128,14 +128,112 @@ Integration test khởi động API thật trên một database LocalDB tạm (`
 
 Danh sách endpoint đầy đủ: [docs/design/06-api.md](docs/design/06-api.md) và Swagger.
 
-## Deploy
+## Cập nhật & triển khai (deploy)
 
-Phase 6 sẽ bổ sung Dockerfile, docker-compose (api, web, admin, sqlserver, redis, nginx) và pipeline CI/CD. Yêu cầu tối thiểu khi deploy thủ công:
+Website chạy bằng Docker trên server `103.200.22.167`, code lấy từ GitHub:
 
-1. `dotnet publish src/NguyenBinh.Api -c Release -o out`
-2. Đặt biến môi trường như bảng trên (`ASPNETCORE_ENVIRONMENT=Production`).
-3. Chạy migration script, khởi động API sau nginx (HTTPS, `client_max_body_size 220m` cho upload video).
-4. Thư mục `Storage__RootPath` phải nằm trên volume bền vững và được backup cùng database.
+| Repo | GitHub | Thư mục trên server |
+|------|--------|---------------------|
+| Backend (API) | `github.com/nguyenkhaccao1/nguyenbinhofficial_be` | `~/apps/nguyenbinhofficial_be` |
+| Frontend (web + admin) | `github.com/nguyenkhaccao1/nguyenbinhofficial_fe` | `~/apps/nguyenbinhofficial_fe` |
+
+Hai repo phải nằm **cạnh nhau** ở cả máy dev và server (`.../nguyenbinhofficial_be` và `.../nguyenbinhofficial_fe`).
+
+### Cách nhanh: một lệnh (khuyên dùng)
+
+Chạy trên máy dev bằng **Git Bash**, sau khi đã commit:
+
+```bash
+cd ~/Expo/nguyenbinhofficial_be
+deploy/release.sh
+```
+
+Script tự làm lần lượt:
+
+1. Kiểm tra cả 2 repo đang ở nhánh `main` và **không còn thay đổi chưa commit**.
+2. Chạy test backend (`dotnet test`) và typecheck frontend — lỗi là dừng, không deploy.
+3. `git push origin main` cả 2 repo lên GitHub.
+4. SSH vào server: `git pull` cả 2 repo → build Docker image → chạy lại container → chờ API healthy.
+5. Gọi thử các trang chính qua HTTPS và báo mã trạng thái.
+
+Tuỳ chọn:
+
+```bash
+deploy/release.sh --skip-tests   # bỏ qua test (chỉ khi sửa nhỏ và đã test trước đó)
+deploy/release.sh --import       # sau deploy, nạp lại nội dung deploy/showcase (dự án, dịch vụ, trang, logo, cấu hình)
+```
+
+### Cách làm tay từng bước
+
+**1. Trên máy dev — commit và đẩy lên GitHub** (repo nào có thay đổi thì làm repo đó):
+
+```bash
+cd ~/Expo/nguyenbinhofficial_be
+git status                      # xem các file đã sửa
+git add -A
+git commit -m "Mô tả ngắn thay đổi"
+git push origin main
+
+cd ../nguyenbinhofficial_fe
+git add -A
+git commit -m "Mô tả ngắn thay đổi"
+git push origin main
+```
+
+**2. SSH vào server, kéo code mới và deploy:**
+
+```bash
+ssh -i ~/.ssh/vietnix_ed25519 root@103.200.22.167
+cd ~/apps/nguyenbinhofficial_be
+bash deploy/deploy.sh --pull    # git pull cả 2 repo → build → chạy lại → kiểm tra health
+```
+
+Hoặc gộp thành một dòng, chạy từ máy dev:
+
+```bash
+ssh -i ~/.ssh/vietnix_ed25519 root@103.200.22.167 "cd ~/apps/nguyenbinhofficial_be && bash deploy/deploy.sh --pull"
+```
+
+Thành công khi dòng cuối là `Deploy OK`. Build mất khoảng 2–5 phút.
+
+**3. (Tuỳ chọn) Nạp lại nội dung** khi sửa `deploy/showcase/projects.json` hoặc ảnh trong `deploy/showcase/images/`:
+
+```bash
+ssh -i ~/.ssh/vietnix_ed25519 root@103.200.22.167 "cd ~/apps/nguyenbinhofficial_be && docker cp deploy/showcase nguyenbinh-api:/tmp/ && docker exec nguyenbinh-api dotnet NguyenBinh.Api.dll import-showcase /tmp/showcase"
+```
+
+Chạy lại nhiều lần vẫn an toàn: ảnh đã có (cùng nội dung) không tải lên lần nữa; dự án, dịch vụ, trang đã có thì được cập nhật. Lưu ý lệnh này **ghi đè** các trường khai báo trong file — nếu đã sửa nội dung đó trong Admin, hãy sửa cả file hoặc bỏ mục đó khỏi file trước khi chạy.
+
+### Nội dung thường ngày: sửa trong Admin, không cần deploy
+
+Dự án, dịch vụ, bài viết, trang, menu, logo, màu, SEO… sửa trực tiếp tại **https://nguyenbinhofficial.com.vn/admin/** rồi bấm **Xuất bản** — website cập nhật ngay. Chỉ cần deploy khi **sửa code**.
+
+### Xem log, khởi động lại, quay về bản trước
+
+```bash
+ssh -i ~/.ssh/vietnix_ed25519 root@103.200.22.167
+cd ~/apps/nguyenbinhofficial_be/deploy
+
+docker compose ps                         # trạng thái 4 container: api, web, admin, redis
+docker logs --tail 100 nguyenbinh-api     # log API (nguyenbinh-web, nguyenbinh-admin tương tự)
+docker compose restart api                # khởi động lại một dịch vụ
+
+# Quay về bản trước (rollback)
+git -C ~/apps/nguyenbinhofficial_be log --oneline -5     # tìm commit muốn quay về
+git -C ~/apps/nguyenbinhofficial_be checkout <commit>
+bash ~/apps/nguyenbinhofficial_be/deploy/deploy.sh       # build lại, KHÔNG dùng --pull
+# Khi đã sửa xong lỗi: git -C ~/apps/nguyenbinhofficial_be checkout main && bash deploy.sh --pull
+```
+
+Migration database tự chạy khi API khởi động và **không tự lùi** khi rollback — sao lưu database trước khi deploy thay đổi schema lớn (xem [docs/deployment.md](docs/deployment.md) mục 6).
+
+### Lưu ý quan trọng
+
+- **Không đụng** container, nginx, database của các site khác trên cùng server (AciPlatform, Cơm Thị Nở). `deploy.sh` chỉ build và chạy lại các container `nguyenbinh-*`.
+- Bí mật (mật khẩu DB, JWT, key ImageKit) nằm trong `~/apps/nguyenbinhofficial_be/deploy/.env` trên server (quyền 600) — **không commit vào git**. Mẫu: `deploy/.env.example`.
+- Nếu chuyển repo GitHub sang **Private**: server cần deploy key để `git pull` (chạy `ssh-keygen` trên server, thêm public key vào *Settings → Deploy keys* của từng repo, đổi `origin` sang dạng `git@github.com:nguyenkhaccao1/...`).
+- Push bị lỗi `403`: máy dev đang dùng sai tài khoản GitHub. Hai repo đã đặt `git config credential.useHttpPath true` để dùng tài khoản `nguyenkhaccao1`.
+- Hạ tầng (DNS, SSL, nginx, sao lưu): [docs/deployment.md](docs/deployment.md).
 
 ## Troubleshooting
 

@@ -52,6 +52,10 @@ Script cấp chứng chỉ cho `nguyenbinhofficial.com.vn` + `www`, rồi chuy�
 
 ## 4. Cập nhật phiên bản
 
+Từ máy dev (khuyên dùng): `deploy/release.sh` — test, push GitHub, SSH vào server pull + build. Hướng dẫn đầy đủ ở README, mục *Cập nhật & triển khai*.
+
+Trên server:
+
 ```bash
 cd ~/apps/nguyenbinhofficial_be
 deploy/deploy.sh --pull     # git pull cả 2 repo, build, chạy lại, kiểm tra health
