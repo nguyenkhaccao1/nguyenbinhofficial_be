@@ -115,6 +115,10 @@ public sealed class PublicContentTests(ApiFactory factory)
         blocks.Select(b => b!["type"]!.GetValue<string>()).Should().Equal("HERO", "IMAGE", "PRODUCTS");
         blocks[2]!["resolved"]!.AsArray().Should().Contain(p => p!["slug"]!.GetValue<string>() == "pub-page-product");
         result["media"]!.AsObject().Should().ContainKey(image.ToString());
+
+        // Lan 2 doc tu cache: enum trong du lieu dong (kieu object) van phai la chuoi, khong bi doi thanh so.
+        var cached = await GetAsync(factory.CreateClient(), "/api/v1/pages/by-path?path=/trang-thu-public");
+        cached["sections"]![0]!["blocks"]![2]!["resolved"]![0]!["productType"]!.GetValueKind().Should().Be(JsonValueKind.String);
     }
 
     [Fact]

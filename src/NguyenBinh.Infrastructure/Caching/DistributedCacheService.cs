@@ -12,7 +12,8 @@ namespace NguyenBinh.Infrastructure.Caching;
 internal sealed class DistributedCacheService(IDistributedCache cache, ILogger<DistributedCacheService> logger)
     : ICacheService
 {
-    private static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
+    // Cung quy uoc voi API (enum UPPER_SNAKE): du lieu kieu object (vd block Resolved) doc lai tu cache van dung dinh dang.
+    private static readonly JsonSerializerOptions Json = NguyenBinh.Application.Content.Common.ContentJson.Options;
     private const string Prefix = "nb:";
 
     public async Task<T> GetOrCreateAsync<T>(string key, Func<CancellationToken, Task<T>> factory, TimeSpan ttl,
