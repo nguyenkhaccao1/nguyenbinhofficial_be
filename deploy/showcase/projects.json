@@ -1271,7 +1271,20 @@
     "contact": {
       "set": {
         "address": "A16TT18 Nguyễn Khuyến, Phường Hà Đông, Thành phố Hà Nội, Việt Nam",
-        "taxCode": "0111558907"
+        "taxCode": "0111558907",
+        "phone": "0971 170 103",
+        "hotline": "0971 170 103",
+        "email": "nguyenkhaccao1@gmail.com",
+        "zaloPhone": "0971 170 103",
+        "zaloUrl": "https://zalo.me/0971170103"
+      }
+    },
+    "forms": {
+      "set": {
+        "notificationEmails": [
+          "nguyenkhaccao1@gmail.com"
+        ],
+        "sendAutoReply": true
       }
     }
   },

@@ -97,6 +97,13 @@ public static class DependencyInjection
         services.AddSingleton<MediaProcessingQueue>();
         services.AddSingleton<IMediaProcessingQueue>(sp => sp.GetRequiredService<MediaProcessingQueue>());
         services.AddHostedService<MediaProcessingWorker>();
+
+        // Email thong bao lead: SMTP (MailKit) + hang doi xu ly nen.
+        services.Configure<Email.SmtpOptions>(configuration.GetSection(Email.SmtpOptions.Section));
+        services.AddSingleton<Application.Leads.IEmailSender, Email.SmtpEmailSender>();
+        services.AddSingleton<Email.LeadNotificationQueue>();
+        services.AddSingleton<Application.Leads.ILeadNotificationQueue>(sp => sp.GetRequiredService<Email.LeadNotificationQueue>());
+        services.AddHostedService<Email.LeadNotificationWorker>();
         services.AddHostedService<NguyenBinh.Infrastructure.Content.ScheduledPublishWorker>();
 
         return services;

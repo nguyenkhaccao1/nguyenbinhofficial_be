@@ -173,6 +173,30 @@ public sealed class PublicContentTests(ApiFactory factory)
             .Should().Be(2);
     }
 
+    [Fact]
+    public async Task Sitemap_lists_published_content_and_skips_noindex_and_drafts()
+    {
+        var admin = await factory.LoginAsync();
+        var visible = await CreateAsync(admin, "projects", new
+        {
+            name = "Sitemap hiện", slug = "sitemap-hien", shortDescription = "Mô tả", ownershipType = "NGUYEN_BINH_OWNED",
+            projectRoles = new[] { "OWNER" }, seo = new { },
+        });
+        (await admin.PostAsync($"/api/v1/admin/projects/{visible}/publish", null)).EnsureSuccessStatusCode();
+        var hidden = await CreateAsync(admin, "projects", new
+        {
+            name = "Sitemap ẩn", slug = "sitemap-an", shortDescription = "Mô tả", ownershipType = "NGUYEN_BINH_OWNED",
+            projectRoles = new[] { "OWNER" }, seo = new { robots = "noindex,follow" },
+        });
+        (await admin.PostAsync($"/api/v1/admin/projects/{hidden}/publish", null)).EnsureSuccessStatusCode();
+        await CreateAsync(admin, "projects", new { name = "Sitemap nháp", slug = "sitemap-nhap", seo = new { } });
+
+        var entries = (await (await factory.CreateClient().GetAsync("/api/v1/site/sitemap")).ReadAsync<JsonArray>()).Data!
+            .Select(e => e!["path"]!.GetValue<string>()).ToList();
+        entries.Should().Contain(["/du-an/sitemap-hien", "/", "/du-an", "/dich-vu"]);
+        entries.Should().NotContain(["/du-an/sitemap-an", "/du-an/sitemap-nhap"]);
+    }
+
     private static async Task<JsonObject> GetAsync(HttpClient client, string url)
     {
         var response = await client.GetAsync(url);

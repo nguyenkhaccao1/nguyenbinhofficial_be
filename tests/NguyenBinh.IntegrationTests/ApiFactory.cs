@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
@@ -41,6 +43,7 @@ public sealed class ApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
             ["Serilog__MinimumLevel__Default"] = "Warning",
             ["Storage__RootPath"] = _storageRoot,
             ["RateLimits__AuthPerMinute"] = "1000",
+            ["RateLimits__FormsPerMinute"] = "1000",
             ["Swagger__Enabled"] = "false",
         };
         foreach (var (key, value) in settings) Environment.SetEnvironmentVariable(key, value);
@@ -49,13 +52,20 @@ public sealed class ApiFactory : WebApplicationFactory<Program>, IAsyncLifetime
     private static string ConnectionString(string database) =>
         $"Server=(localdb)\\MSSQLLocalDB;Database={database};Trusted_Connection=True;TrustServerCertificate=True";
 
-    protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder) =>
+    /// <summary>Email gui ra trong test (khong goi SMTP that).</summary>
+    public FakeEmailSender Emails { get; } = new();
+
+    protected override void ConfigureWebHost(Microsoft.AspNetCore.Hosting.IWebHostBuilder builder)
+    {
         // Giong Development: phat hien som service khong dung duoc (thieu dang ky, sai lifetime).
         builder.UseDefaultServiceProvider(o =>
         {
             o.ValidateOnBuild = true;
             o.ValidateScopes = true;
         });
+        builder.ConfigureTestServices(services =>
+            services.AddSingleton<NguyenBinh.Application.Leads.IEmailSender>(Emails));
+    }
 
     public Task InitializeAsync()
     {

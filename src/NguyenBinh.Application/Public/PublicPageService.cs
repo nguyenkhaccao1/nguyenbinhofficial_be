@@ -18,8 +18,9 @@ internal sealed partial class PublicContentService
             var menus = await db.Set<Menu>().AsNoTracking().Include(m => m.Items).ToListAsync(token);
             var products = (await ProductsAsync(token))
                 .Select(p => new NavMegaItem(p.Name, $"/san-pham/{p.Slug}", p.Tagline ?? p.ShortDescription, null)).ToList();
-            var services = (await ServicesAsync(token)).SelectMany(g => g.Services)
-                .Select(s => new NavMegaItem(s.Name, $"/dich-vu/{s.Slug}", s.ShortDescription, s.Icon)).ToList();
+            var services = (await ServicesAsync(token))
+                .SelectMany(g => g.Services.Select(s => new NavMegaItem(s.Name, $"/dich-vu/{s.Slug}", s.ShortDescription, s.Icon, g.CategoryName)))
+                .ToList();
             var solutions = (await IndustriesAsync(token)).Where(i => i.SolutionPath is not null)
                 .Select(i => new NavMegaItem(i.Name, i.SolutionPath!, i.Description, i.Icon)).ToList();
             var featured = (await ProjectsAsync(new ProjectQuery { PageSize = 6 }, token)).Items

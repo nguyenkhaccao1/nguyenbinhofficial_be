@@ -32,6 +32,7 @@ public static class DependencyInjection
         services.AddScoped<IRoleService, RoleService>();
 
         services.AddScoped<ISettingsService, SettingsService>();
+        services.AddScoped<Leads.ILeadService, Leads.LeadService>();
 
         services.AddScoped<IMediaUsageTracker, MediaUsageTracker>();
         services.AddScoped<IMediaService, MediaService>();

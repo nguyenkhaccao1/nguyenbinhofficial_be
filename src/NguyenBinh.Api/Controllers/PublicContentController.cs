@@ -18,6 +18,10 @@ namespace NguyenBinh.Api.Controllers;
 [ResponseCache(Duration = 60, Location = ResponseCacheLocation.Any)]
 public sealed class PublicContentController(IPublicContentService content) : ApiControllerBase
 {
+    [HttpGet("site/sitemap")]
+    public async Task<ActionResult<ApiResponse<IReadOnlyList<SitemapEntry>>>> Sitemap(CancellationToken ct) =>
+        Success(await content.SitemapAsync(ct));
+
     [HttpGet("site/navigation")]
     public async Task<ActionResult<ApiResponse<NavigationDto>>> Navigation(CancellationToken ct) =>
         Success(await content.NavigationAsync(ct));

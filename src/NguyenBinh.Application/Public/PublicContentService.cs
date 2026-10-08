@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using NguyenBinh.Application.Common.Abstractions;
 using NguyenBinh.Application.Content.Common;
 using NguyenBinh.Application.Media;
+using NguyenBinh.Domain.Common;
 using NguyenBinh.Domain.Content;
 using NguyenBinh.Shared.Results;
 using static NguyenBinh.Application.Public.PublicQueries;
@@ -28,6 +29,7 @@ public interface IPublicContentService
     Task<IReadOnlyList<BlogCategoryDto>> BlogCategoriesAsync(CancellationToken ct = default);
     Task<BlogResolveResult?> BlogResolveAsync(string slug, CancellationToken ct = default);
     Task<SearchResult> SearchAsync(string q, CancellationToken ct = default);
+    Task<IReadOnlyList<SitemapEntry>> SitemapAsync(CancellationToken ct = default);
 }
 
 internal sealed partial class PublicContentService(
@@ -389,6 +391,50 @@ internal sealed partial class PublicContentService(
         }, ct);
 
     // ======================= Tim kiem =======================
+
+    // ======================= Sitemap =======================
+
+    /// <summary>
+    /// Moi URL cong khai cho sitemap.xml: trang page builder, du an, san pham, dich vu, bai viet, danh muc blog co bai,
+    /// cac trang danh sach co dinh. Bo qua noi dung dat robots "noindex".
+    /// </summary>
+    public Task<IReadOnlyList<SitemapEntry>> SitemapAsync(CancellationToken ct = default) =>
+        Cached("sitemap", async token =>
+        {
+            static bool Indexable(string? robots) => robots is null || !robots.Contains("noindex", StringComparison.OrdinalIgnoreCase);
+            static DateTimeOffset? Last(DateTimeOffset? updated, DateTimeOffset? published, DateTimeOffset created) =>
+                updated ?? published ?? created;
+
+            var entries = new List<SitemapEntry>();
+            var pages = await db.Set<Page>().AsNoTracking().Visible(Now)
+                .Select(p => new { p.Path, p.PageType, p.Seo.Robots, p.UpdatedAt, p.PublishedAt, p.CreatedAt }).ToListAsync(token);
+            entries.AddRange(pages.Where(p => Indexable(p.Robots)).Select(p =>
+                new SitemapEntry(p.Path, Last(p.UpdatedAt, p.PublishedAt, p.CreatedAt), p.PageType == PageType.Home ? "home" : "page")));
+
+            async Task Add<T>(IQueryable<T> query, string prefix, string kind) where T : ContentEntity, IHasSlug, IHasSeo
+            {
+                var rows = await query.AsNoTracking().Visible(Now)
+                    .Select(e => new { e.Slug, e.Seo.Robots, e.UpdatedAt, e.PublishedAt, e.CreatedAt }).ToListAsync(token);
+                entries.AddRange(rows.Where(r => Indexable(r.Robots))
+                    .Select(r => new SitemapEntry($"{prefix}/{r.Slug}", Last(r.UpdatedAt, r.PublishedAt, r.CreatedAt), kind)));
+            }
+
+            await Add(db.Set<Project>(), "/du-an", "project");
+            await Add(db.Set<Product>(), "/san-pham", "product");
+            await Add(db.Set<Service>(), "/dich-vu", "service");
+            await Add(db.Set<Post>(), "/blog", "post");
+
+            var categories = await db.Set<Post>().AsNoTracking().Visible(Now)
+                .SelectMany(p => p.Categories.Select(c => c.Category!.Slug)).Distinct().ToListAsync(token);
+            entries.AddRange(categories.Select(slug => new SitemapEntry($"/blog/{slug}", null, "category")));
+
+            // Trang danh sach co dinh (neu chua co trang page builder trung duong dan).
+            var lastContent = entries.Max(e => e.LastModified);
+            foreach (var path in new[] { "/", "/du-an", "/san-pham", "/dich-vu", "/giai-phap", "/cong-nghe", "/blog", "/lien-he" })
+                if (entries.All(e => e.Path != path)) entries.Add(new SitemapEntry(path, lastContent, path == "/" ? "home" : "listing"));
+
+            return (IReadOnlyList<SitemapEntry>)entries.DistinctBy(e => e.Path).OrderBy(e => e.Path).ToList();
+        }, ct);
 
     public async Task<SearchResult> SearchAsync(string q, CancellationToken ct = default)
     {

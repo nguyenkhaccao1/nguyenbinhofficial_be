@@ -53,6 +53,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUser c
         builder.Properties<TechnologyGroup>().HaveConversion<string>().HaveMaxLength(40);
         builder.Properties<FaqScope>().HaveConversion<string>().HaveMaxLength(40);
         builder.Properties<PageType>().HaveConversion<string>().HaveMaxLength(40);
+        builder.Properties<Domain.Leads.LeadFormType>().HaveConversion<string>().HaveMaxLength(20);
+        builder.Properties<Domain.Leads.LeadStatus>().HaveConversion<string>().HaveMaxLength(20);
     }
 
     public override int SaveChanges(bool acceptAllChangesOnSuccess)

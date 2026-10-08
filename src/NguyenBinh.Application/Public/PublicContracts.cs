@@ -235,7 +235,8 @@ public sealed record PublicPage(
 public sealed record NavItem(string Label, string? Url, string? Description, bool OpenInNewTab, IReadOnlyList<NavItem> Children,
     string? MegaSource, IReadOnlyList<NavMegaItem> Mega);
 
-public sealed record NavMegaItem(string Label, string Url, string? Description, string? Icon);
+/// <summary>Group: ten nhom (vd nhom dich vu) de megamenu chia cot.</summary>
+public sealed record NavMegaItem(string Label, string Url, string? Description, string? Icon, string? Group = null);
 
 public sealed record NavigationDto(
     IReadOnlyList<NavItem> Header,
@@ -251,3 +252,8 @@ public sealed record NavigationDto(
 public sealed record SearchHit(string Kind, string Title, string Url, string? Excerpt, PublicImage? Image);
 
 public sealed record SearchResult(string Query, IReadOnlyList<SearchHit> Hits);
+
+// ---------- Sitemap ----------
+
+/// <summary>Kind: home | page | listing | project | product | service | post | category.</summary>
+public sealed record SitemapEntry(string Path, DateTimeOffset? LastModified, string Kind);
