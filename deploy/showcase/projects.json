@@ -1247,6 +1247,9 @@
         "logo": "nguyen-binh-bieu-tuong.png",
         "logoDark": "nguyen-binh-logo-nen-toi.png",
         "favicon": "nguyen-binh-favicon.png"
+      },
+      "set": {
+        "legalName": "Công ty TNHH Một thành viên Nguyên Bình CTN"
       }
     },
     "theme": {
@@ -1264,6 +1267,363 @@
       "media": {
         "defaultOgImage": "nguyen-binh-anh-chia-se.jpg"
       }
+    },
+    "contact": {
+      "set": {
+        "address": "A16TT18 Nguyễn Khuyến, Phường Hà Đông, Thành phố Hà Nội, Việt Nam",
+        "taxCode": "0111558907"
+      }
     }
-  }
+  },
+  "pages": [
+    {
+      "path": "/gioi-thieu",
+      "publish": true,
+      "set": {
+        "title": "Giới thiệu",
+        "pageType": "STANDARD",
+        "seo": {
+          "title": "Giới thiệu Nguyên Bình CTN — Công ty lập trình phần mềm tại Hà Nội",
+          "description": "Công ty TNHH Một thành viên Nguyên Bình CTN (MST 0111558907): phần mềm quản lý doanh nghiệp, POS, quản lý khách sạn, nhân sự, website và mobile app. Đội ngũ trẻ, chuyên nghiệp, đúng tiến độ hợp đồng."
+        },
+        "sections": [
+          {
+            "name": "Hero",
+            "isEnabled": true,
+            "settings": {
+              "tone": "dark",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "HERO",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Về Nguyên Bình",
+                  "title": "Nguyên Bình CTN — đối tác công nghệ cho vận hành doanh nghiệp",
+                  "subtitle": "Lập trình phần mềm và triển khai giải pháp công nghệ: phần mềm quản lý doanh nghiệp, POS, quản lý khách sạn, nhân sự, website và ứng dụng di động.",
+                  "primaryCta": {
+                    "label": "Xem dự án đã triển khai",
+                    "url": "/du-an"
+                  },
+                  "secondaryCta": {
+                    "label": "Liên hệ",
+                    "url": "/lien-he"
+                  },
+                  "visual": {
+                    "source": "featuredProjectScreenshots",
+                    "limit": 3
+                  }
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Chúng tôi là ai",
+            "isEnabled": true,
+            "settings": {
+              "tone": "light",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "HEADING",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Câu chuyện",
+                  "title": "Chúng tôi là ai",
+                  "level": "h2"
+                },
+                "settings": {}
+              },
+              {
+                "type": "RICH_TEXT",
+                "isEnabled": true,
+                "data": {
+                  "html": "<p><strong>Công ty TNHH Một thành viên Nguyên Bình CTN</strong> (Nguyên Bình CTN) là doanh nghiệp hoạt động trong lĩnh vực lập trình máy tính, đặt trụ sở tại Hà Đông, Hà Nội. Chúng tôi xây dựng phần mềm được dùng trong vận hành thực tế: hệ thống quản trị nội bộ cho doanh nghiệp, phần mềm quản lý nhân sự, POS bán hàng, ứng dụng di động, website và thương mại điện tử.</p><p>Bên cạnh sản phẩm tự phát triển, Nguyên Bình liên kết với các đối tác chuyên môn để cung cấp trọn gói cho khách hàng: phần mềm quản lý khách sạn <a href=\"/dich-vu/phan-mem-quan-ly-khach-san-perfectkey\">PerfectKey</a> (Công ty TNHH Tin học Thương mại Nhị Hà) và các dịch vụ <a href=\"/dich-vu/thi-cong-he-thong-dien-nhe\">điện nhẹ</a>, <a href=\"/dich-vu/dich-vu-cong-nghe-thong-tin\">CNTT</a>, <a href=\"/dich-vu/ve-sinh-cong-nghiep\">vệ sinh công nghiệp</a> (Công ty TNHH Tường Quang Phát). Khách hàng làm việc với một đầu mối duy nhất cho cả phần mềm, hạ tầng và vận hành.</p>"
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Đội ngũ",
+            "isEnabled": true,
+            "settings": {
+              "tone": "subtle",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "FEATURE_GRID",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Đội ngũ",
+                  "title": "Trẻ, năng động và làm việc chuyên nghiệp",
+                  "subtitle": "Đội ngũ nhân lực trẻ, tiềm năng, phát triển nhanh — làm việc nhanh chóng, chính xác và đúng cam kết.",
+                  "columns": "4",
+                  "items": [
+                    {
+                      "icon": "rocket",
+                      "title": "Trẻ, năng động",
+                      "description": "Đội ngũ trẻ, chủ động cập nhật công nghệ mới và áp dụng ngay vào dự án."
+                    },
+                    {
+                      "icon": "zap",
+                      "title": "Nhanh chóng, chính xác",
+                      "description": "Phân tích kỹ yêu cầu trước khi làm; bàn giao từng phần để khách hàng kiểm tra sớm."
+                    },
+                    {
+                      "icon": "calendar",
+                      "title": "Đảm bảo tiến độ",
+                      "description": "Cam kết tiến độ và phạm vi theo hợp đồng; báo cáo tiến độ định kỳ, minh bạch."
+                    },
+                    {
+                      "icon": "shield-check",
+                      "title": "Chuyên nghiệp",
+                      "description": "Hợp đồng, báo giá, hoá đơn rõ ràng; tài liệu bàn giao đầy đủ; bảo hành sau triển khai."
+                    }
+                  ]
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Pháp lý",
+            "isEnabled": true,
+            "settings": {
+              "tone": "light",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "HEADING",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Pháp lý",
+                  "title": "Thông tin doanh nghiệp",
+                  "subtitle": "Pháp nhân rõ ràng, có thể tra cứu công khai theo mã số thuế.",
+                  "level": "h2"
+                },
+                "settings": {}
+              },
+              {
+                "type": "RICH_TEXT",
+                "isEnabled": true,
+                "data": {
+                  "html": "<table><tbody><tr><th>Tên doanh nghiệp</th><td>CÔNG TY TNHH MỘT THÀNH VIÊN NGUYÊN BÌNH CTN</td></tr><tr><th>Tên quốc tế</th><td>NGUYEN BINH CTN ONE MEMBER COMPANY LIMITED</td></tr><tr><th>Mã số thuế</th><td>0111558907</td></tr><tr><th>Địa chỉ</th><td>A16TT18 Nguyễn Khuyến, Phường Hà Đông, Thành phố Hà Nội, Việt Nam</td></tr><tr><th>Người đại diện theo pháp luật</th><td>Nguyễn Khắc Cao</td></tr><tr><th>Loại hình doanh nghiệp</th><td>Công ty trách nhiệm hữu hạn một thành viên</td></tr><tr><th>Ngành nghề kinh doanh chính</th><td>Lập trình máy tính</td></tr><tr><th>Ngày bắt đầu hoạt động</th><td>03/07/2026</td></tr><tr><th>Cơ quan quản lý thuế</th><td>Thuế cơ sở 15 thành phố Hà Nội</td></tr><tr><th>Tình trạng</th><td>Đang hoạt động</td></tr></tbody></table><p>Thông tin doanh nghiệp có thể tra cứu công khai theo mã số thuế <strong>0111558907</strong> trên <a href=\"https://dangkykinhdoanh.gov.vn/\" target=\"_blank\" rel=\"noopener\">Cổng thông tin quốc gia về đăng ký doanh nghiệp</a>. Mọi hợp đồng, báo giá và hoá đơn đều được ký và xuất bởi pháp nhân này.</p>"
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Lĩnh vực",
+            "isEnabled": true,
+            "settings": {
+              "tone": "subtle",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "FEATURE_GRID",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Lĩnh vực",
+                  "title": "Chúng tôi làm gì",
+                  "columns": "3",
+                  "items": [
+                    {
+                      "icon": "building-2",
+                      "title": "Quản lý doanh nghiệp",
+                      "description": "Hệ thống quản trị nội bộ theo quy trình riêng của doanh nghiệp.",
+                      "link": "/dich-vu/giai-phap-quan-ly-doanh-nghiep"
+                    },
+                    {
+                      "icon": "users",
+                      "title": "Quản lý nhân sự (HRM)",
+                      "description": "Chấm công, xếp lịch, tính lương; web và mobile.",
+                      "link": "/dich-vu/phan-mem-quan-ly-nhan-su-hrm"
+                    },
+                    {
+                      "icon": "receipt",
+                      "title": "Phần mềm POS",
+                      "description": "Cung cấp, setup, đào tạo, bảo trì và vệ sinh hệ thống.",
+                      "link": "/dich-vu/phan-mem-pos-ban-hang"
+                    },
+                    {
+                      "icon": "hotel",
+                      "title": "Quản lý khách sạn",
+                      "description": "Triển khai PerfectKey: Front Office, POS, kế toán, kho.",
+                      "link": "/dich-vu/phan-mem-quan-ly-khach-san-perfectkey"
+                    },
+                    {
+                      "icon": "globe",
+                      "title": "Website & Mobile App",
+                      "description": "Website chuẩn SEO, thương mại điện tử, ứng dụng Android/iOS.",
+                      "link": "/dich-vu/thiet-ke-website"
+                    },
+                    {
+                      "icon": "server",
+                      "title": "Hạ tầng & dịch vụ kỹ thuật",
+                      "description": "Điện nhẹ, CNTT, vệ sinh công nghiệp cùng đối tác.",
+                      "link": "/dich-vu/thi-cong-he-thong-dien-nhe"
+                    }
+                  ]
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Quy trình",
+            "isEnabled": true,
+            "settings": {
+              "tone": "light",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "TIMELINE",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Cách làm việc",
+                  "title": "Rõ ràng từ báo giá đến bàn giao",
+                  "items": [
+                    {
+                      "title": "Tiếp nhận & khảo sát",
+                      "description": "Lắng nghe nhu cầu, khảo sát quy trình và hiện trạng.",
+                      "output": "Tài liệu yêu cầu"
+                    },
+                    {
+                      "title": "Báo giá & hợp đồng",
+                      "description": "Phạm vi, tiến độ, chi phí được thống nhất bằng văn bản.",
+                      "output": "Hợp đồng ký kết"
+                    },
+                    {
+                      "title": "Triển khai theo tiến độ",
+                      "description": "Bàn giao theo giai đoạn, báo cáo tiến độ định kỳ.",
+                      "output": "Sản phẩm từng giai đoạn"
+                    },
+                    {
+                      "title": "Nghiệm thu & đào tạo",
+                      "description": "Kiểm thử, nghiệm thu, hướng dẫn sử dụng.",
+                      "output": "Biên bản nghiệm thu"
+                    },
+                    {
+                      "title": "Bảo hành & đồng hành",
+                      "description": "Hỗ trợ vận hành, bảo trì, nâng cấp theo nhu cầu.",
+                      "output": "Hệ thống vận hành ổn định"
+                    }
+                  ]
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Dự án",
+            "isEnabled": true,
+            "settings": {
+              "tone": "subtle",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "PROJECTS",
+                "isEnabled": true,
+                "data": {
+                  "eyebrow": "Dự án",
+                  "title": "Một số dự án đã triển khai",
+                  "source": "featured",
+                  "limit": 3,
+                  "layout": "grid",
+                  "cta": {
+                    "label": "Tất cả dự án",
+                    "url": "/du-an"
+                  }
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "Đối tác",
+            "isEnabled": true,
+            "settings": {
+              "tone": "light",
+              "width": "content",
+              "padding": "md",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "LOGO_CLOUD",
+                "isEnabled": true,
+                "data": {
+                  "title": "Đối tác của Nguyên Bình",
+                  "source": "partners"
+                },
+                "settings": {}
+              }
+            ]
+          },
+          {
+            "name": "CTA",
+            "isEnabled": true,
+            "settings": {
+              "tone": "light",
+              "width": "content",
+              "padding": "lg",
+              "align": "left",
+              "animation": "fade-up"
+            },
+            "blocks": [
+              {
+                "type": "CTA",
+                "isEnabled": true,
+                "data": {
+                  "title": "Bạn cần một đối tác công nghệ đúng tiến độ?",
+                  "subtitle": "Trao đổi nhu cầu với Nguyên Bình — chúng tôi phản hồi với phương án và báo giá rõ ràng.",
+                  "primaryCta": {
+                    "label": "Liên hệ ngay",
+                    "url": "/lien-he"
+                  },
+                  "secondaryCta": {
+                    "label": "Xem dịch vụ",
+                    "url": "/dich-vu"
+                  }
+                },
+                "settings": {}
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
 }

@@ -56,8 +56,11 @@ public sealed partial class ShowcaseImporter(
     // Settings: { "brand": { "set": {...}, "media": { "logo": "file.png" } }, "theme": {...}, "seo": {...} }
     private sealed record SettingSpec(JsonObject? Set, Dictionary<string, string>? Media);
 
+    // Trang page builder: tim theo Path — co thi cap nhat (ghi de cac truong trong Set), chua co thi tao moi.
+    private sealed record PageContentSpec(string Path, bool Publish, JsonObject Set);
+
     private sealed record ShowcaseFile(List<ProjectSpec>? Projects, List<PageSpec>? PublishPages, List<CategorySpec>? ServiceCategories,
-        List<ServiceSpec>? Services, List<PartnerSpec>? Partners, Dictionary<string, SettingSpec>? Settings);
+        List<ServiceSpec>? Services, List<PartnerSpec>? Partners, Dictionary<string, SettingSpec>? Settings, List<PageContentSpec>? Pages);
 
     public async Task<int> ImportAsync(string directory, CancellationToken ct = default)
     {
@@ -95,6 +98,9 @@ public sealed partial class ShowcaseImporter(
             await Run($"service {spec.Slug}", () => ImportServiceAsync(directory, spec, technologies, ct));
         foreach (var spec in file.Partners ?? [])
             await Run($"partner {spec.Name}", () => ImportPartnerAsync(directory, spec, ct));
+
+        foreach (var spec in file.Pages ?? [])
+            await Run($"page {spec.Path}", () => ImportPageAsync(spec, ct));
 
         // Trang (vd trang chu seed san) chi xuat ban sau khi da co du lieu that cho cac block dong.
         foreach (var page in file.PublishPages ?? [])
@@ -217,6 +223,32 @@ public sealed partial class ShowcaseImporter(
         {
             await services.PublishAsync(saved.Meta.Id, ct);
             logger.LogInformation("Dich vu {Slug}: da xuat ban", spec.Slug);
+        }
+    }
+
+    // ------------------------------------------------------------------ Trang
+
+    private async Task ImportPageAsync(PageContentSpec spec, CancellationToken ct)
+    {
+        var set = (JsonObject)spec.Set.DeepClone();
+        set["path"] = spec.Path;
+        var existingId = await db.Set<Page>().AsNoTracking().Where(p => p.Path == spec.Path).Select(p => (Guid?)p.Id).FirstOrDefaultAsync(ct);
+        ContentDetail<PageInput> saved;
+        if (existingId is { } id)
+        {
+            var current = await pages.GetAsync(id, ct);
+            saved = await pages.UpdateAsync(id, Merge(current.Data, set), current.Meta.RowVersion, ct);
+        }
+        else
+        {
+            saved = await pages.CreateAsync(Merge(new PageInput(), set), ct);
+        }
+        logger.LogInformation("Trang {Path}: da luu", spec.Path);
+
+        if (spec.Publish && saved.Meta.Status != ContentStatus.Published)
+        {
+            await pages.PublishAsync(saved.Meta.Id, ct);
+            logger.LogInformation("Trang {Path}: da xuat ban", spec.Path);
         }
     }
 
