@@ -37,8 +37,11 @@ internal sealed class SmtpEmailSender(IOptions<SmtpOptions> options, ILogger<Smt
             throw new InvalidOperationException("Chưa cấu hình SMTP (Smtp__Host, Smtp__Username, Smtp__Password).");
         }
 
+        var host = _o.Host!;
+        var from = (_o.FromAddress ?? _o.Username)!;
+
         var mime = new MimeMessage();
-        mime.From.Add(new MailboxAddress(_o.FromName, _o.FromAddress ?? _o.Username));
+        mime.From.Add(new MailboxAddress(_o.FromName, from));
         foreach (var to in message.To) mime.To.Add(MailboxAddress.Parse(to));
         if (!string.IsNullOrWhiteSpace(message.ReplyTo)) mime.ReplyTo.Add(MailboxAddress.Parse(message.ReplyTo));
         mime.Subject = message.Subject;
@@ -47,8 +50,8 @@ internal sealed class SmtpEmailSender(IOptions<SmtpOptions> options, ILogger<Smt
         using var client = new SmtpClient { Timeout = 20_000 };
         // 465 = SSL ngay tu dau; 587/25 = STARTTLS (bat buoc ma hoa khi server ho tro).
         var security = _o.Port == 465 ? SecureSocketOptions.SslOnConnect : SecureSocketOptions.StartTls;
-        await client.ConnectAsync(_o.Host, _o.Port, security, ct);
-        if (!string.IsNullOrWhiteSpace(_o.Username)) await client.AuthenticateAsync(_o.Username, _o.Password, ct);
+        await client.ConnectAsync(host, _o.Port, security, ct);
+        if (!string.IsNullOrWhiteSpace(_o.Username)) await client.AuthenticateAsync(_o.Username, _o.Password ?? string.Empty, ct);
         await client.SendAsync(mime, ct);
         await client.DisconnectAsync(true, ct);
     }

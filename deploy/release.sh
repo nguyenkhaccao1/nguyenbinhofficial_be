@@ -37,6 +37,10 @@ $(git -C "$repo" status --short)
 done
 
 # 2. Kiem tra truoc khi day len.
+# Build Release giong server (canh bao = loi) — bat loi truoc khi day len.
+step "Build backend (Release)"
+(cd "$BE" && dotnet build -c Release --nologo -v q) || fail "Build Release lỗi — không deploy."
+
 if [[ $RUN_TESTS == 1 ]]; then
   step "Test backend (dotnet test)"
   (cd "$BE" && dotnet test --nologo -v q) || fail "Test backend lỗi — không deploy."
@@ -52,7 +56,7 @@ done
 
 # 4. Server: pull ca 2 repo, build image, chay lai container, cho API healthy.
 step "Deploy trên server $SERVER"
-ssh -i "$KEY" "$SERVER" "cd ~/apps/nguyenbinhofficial_be && bash deploy/deploy.sh --pull"
+ssh -i "$KEY" "$SERVER" "cd ~/apps/nguyenbinhofficial_be && bash deploy/deploy.sh --pull"   || fail "Deploy trên server lỗi (xem log ở trên). Website vẫn chạy bản cũ — sửa lỗi rồi chạy lại."
 
 if [[ $IMPORT == 1 ]]; then
   step "Nạp nội dung deploy/showcase"
