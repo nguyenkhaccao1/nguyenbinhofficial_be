@@ -39,8 +39,16 @@ internal sealed partial class PublicContentService(
     private static readonly TimeSpan Ttl = TimeSpan.FromSeconds(60);
     private DateTimeOffset Now => clock.GetUtcNow();
 
-    private Task<T> Cached<T>(string key, Func<CancellationToken, Task<T>> load, CancellationToken ct) =>
-        cache.GetOrCreateAsync($"public:{key}", load, Ttl, ct);
+    /// <summary>
+    /// Cache theo "phien ban noi dung": moi lan admin luu noi dung, PublicCacheInvalidator doi phien ban
+    /// → toan bo cache public het hieu luc ngay (khong phai cho het TTL).
+    /// </summary>
+    private async Task<T> Cached<T>(string key, Func<CancellationToken, Task<T>> load, CancellationToken ct)
+    {
+        var version = await cache.GetOrCreateAsync(PublicCache.VersionKey, _ => Task.FromResult(Guid.NewGuid().ToString("N")[..12]),
+            TimeSpan.FromDays(30), ct);
+        return await cache.GetOrCreateAsync($"public:{version}:{key}", load, Ttl, ct);
+    }
 
     // ======================= Du an =======================
 
@@ -223,9 +231,11 @@ internal sealed partial class PublicContentService(
                 .OrderBy(s => s.SortOrder).ThenBy(s => s.Name).ToListAsync(token);
             var cards = await ToServiceCardsAsync(services, token);
             return (IReadOnlyList<ServiceGroup>)services.Zip(cards)
-                .GroupBy(x => x.First.Category)
-                .OrderBy(g => g.Key?.SortOrder ?? int.MaxValue)
-                .Select(g => new ServiceGroup(g.Key?.Name, g.Key?.Slug, g.Select(x => x.Second).ToList()))
+                // Gom theo Id: AsNoTracking tao object Category rieng cho moi dich vu → khong gom theo tham chieu.
+                .GroupBy(x => x.First.CategoryId)
+                .Select(g => (Category: g.First().First.Category, Cards: g.Select(x => x.Second).ToList()))
+                .OrderBy(g => g.Category?.SortOrder ?? int.MaxValue)
+                .Select(g => new ServiceGroup(g.Category?.Name, g.Category?.Slug, g.Cards))
                 .ToList();
         }, ct);
 

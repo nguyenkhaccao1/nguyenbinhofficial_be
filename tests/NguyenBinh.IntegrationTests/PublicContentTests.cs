@@ -148,6 +148,27 @@ public sealed class PublicContentTests(ApiFactory factory)
         (await anonymous.GetAsync("/api/v1/blog/resolve/khong-co")).StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
 
+    [Fact]
+    public async Task Services_in_same_category_are_grouped_together()
+    {
+        var admin = await factory.LoginAsync();
+        var categoryId = (await (await admin.GetAsync("/api/v1/admin/lookups")).ReadAsync<JsonObject>()).Data!["serviceCategories"]!
+            .AsArray()[0]!["id"]!.GetValue<string>();
+        foreach (var slug in new[] { "nhom-dv-1", "nhom-dv-2" })
+        {
+            var id = await CreateAsync(admin, "services", new
+            {
+                name = $"Dịch vụ {slug}", slug, categoryId, shortDescription = "Mô tả ngắn", description = "<p>Nội dung chi tiết</p>", seo = new { },
+            });
+            (await admin.PostAsync($"/api/v1/admin/services/{id}/publish", null)).EnsureSuccessStatusCode();
+        }
+
+        var groups = (await (await factory.CreateClient().GetAsync("/api/v1/services")).ReadAsync<JsonArray>()).Data!;
+        groups.Where(g => g!["services"]!.AsArray().Any(s => s!["slug"]!.GetValue<string>().StartsWith("nhom-dv-")))
+            .Should().ContainSingle().Which!["services"]!.AsArray().Count(s => s!["slug"]!.GetValue<string>().StartsWith("nhom-dv-"))
+            .Should().Be(2);
+    }
+
     private static async Task<JsonObject> GetAsync(HttpClient client, string url)
     {
         var response = await client.GetAsync(url);

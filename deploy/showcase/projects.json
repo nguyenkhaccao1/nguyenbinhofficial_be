@@ -282,5 +282,988 @@
     {
       "path": "/"
     }
-  ]
+  ],
+  "serviceCategories": [
+    {
+      "slug": "giai-phap-phan-mem",
+      "name": "Giải pháp phần mềm quản lý",
+      "sortOrder": 0
+    },
+    {
+      "slug": "phat-trien-phan-mem",
+      "name": "Phát triển phần mềm",
+      "sortOrder": 1
+    },
+    {
+      "slug": "website-ecommerce",
+      "name": "Website & Thương mại điện tử",
+      "sortOrder": 2
+    },
+    {
+      "slug": "mobile",
+      "name": "Mobile App",
+      "sortOrder": 3
+    },
+    {
+      "slug": "tich-hop-van-hanh",
+      "name": "Tích hợp & vận hành",
+      "sortOrder": 4
+    },
+    {
+      "slug": "ha-tang-dich-vu-ky-thuat",
+      "name": "Hạ tầng & dịch vụ kỹ thuật",
+      "sortOrder": 5
+    }
+  ],
+  "services": [
+    {
+      "slug": "giai-phap-quan-ly-doanh-nghiep",
+      "name": "Giải pháp quản lý doanh nghiệp (ERP)",
+      "category": "giai-phap-phan-mem",
+      "folder": "Dịch vụ/Quản lý doanh nghiệp",
+      "publish": true,
+      "relatedProjects": [
+        "nam-viet-hung",
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core",
+        "React",
+        "TypeScript",
+        "SQL Server"
+      ],
+      "set": {
+        "icon": "building-2",
+        "isFeatured": true,
+        "sortOrder": 0,
+        "shortDescription": "Hệ thống quản trị nội bộ may đo theo quy trình của doanh nghiệp: quản lý hợp đồng, công việc, vật tư, chi phí, phê duyệt và báo cáo tập trung.",
+        "description": "<p>Mỗi doanh nghiệp có quy trình riêng mà phần mềm đóng gói khó đáp ứng trọn vẹn. Nguyên Bình xây dựng hệ thống quản trị nội bộ theo đúng cách doanh nghiệp đang vận hành — dữ liệu tập trung một nơi, phân quyền theo phòng ban và báo cáo cho ban lãnh đạo.</p><p>Nguyên Bình đã triển khai hệ thống quản trị nội bộ cho doanh nghiệp trong lĩnh vực xây dựng và thương mại (Công ty CP Thương mại Xây dựng Nam Việt Hùng).</p><h3>Có thể bao gồm</h3><ul><li>Quản lý khách hàng, hợp đồng, công trình/dự án.</li><li>Quản lý công việc, tiến độ, phê duyệt nhiều cấp.</li><li>Vật tư, kho, mua hàng và chi phí.</li><li>Nhân sự, chấm công (kết nối giải pháp HRM).</li><li>Dashboard và báo cáo theo thời gian thực; xuất Excel/PDF.</li><li>Ứng dụng web và mobile, đăng nhập một lần cho toàn hệ thống.</li></ul>",
+        "deliverables": "<ul><li>Phần mềm chạy trên web (và mobile nếu cần)</li><li>Tài liệu hướng dẫn sử dụng</li><li>Đào tạo người dùng, quản trị viên</li><li>Bảo hành và hỗ trợ sau triển khai</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ],
+        "features": [
+          {
+            "title": "Theo đúng quy trình doanh nghiệp",
+            "description": "Thiết kế từ quy trình thật, không ép doanh nghiệp đổi cách làm theo phần mềm.",
+            "icon": "workflow"
+          },
+          {
+            "title": "Phân quyền chi tiết",
+            "description": "Phân quyền theo vai trò, phòng ban, chi nhánh; lưu vết thao tác.",
+            "icon": "shield-check"
+          },
+          {
+            "title": "Báo cáo tập trung",
+            "description": "Dashboard tổng hợp cho ban lãnh đạo, số liệu từ một nguồn duy nhất.",
+            "icon": "layout-dashboard"
+          },
+          {
+            "title": "Mở rộng dần",
+            "description": "Bắt đầu từ phân hệ cần nhất, mở rộng thêm khi doanh nghiệp phát triển.",
+            "icon": "layers"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "phan-mem-quan-ly-nhan-su-hrm",
+      "name": "Phần mềm quản lý nhân sự (HRM)",
+      "category": "giai-phap-phan-mem",
+      "folder": "Dịch vụ/Quản lý nhân sự HRM",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core",
+        "React",
+        "TypeScript",
+        "Flutter",
+        "SQL Server"
+      ],
+      "set": {
+        "icon": "users",
+        "isFeatured": true,
+        "sortOrder": 1,
+        "shortDescription": "Quản lý nhân sự, cơ cấu tổ chức, ca làm, chấm công, xếp lịch và tính lương — có ứng dụng web cho quản lý và ứng dụng di động cho nhân viên.",
+        "description": "<p>Giải pháp HRM giúp doanh nghiệp số hoá toàn bộ vòng đời nhân sự: từ hồ sơ, cơ cấu tổ chức, phân công đến chấm công, tăng ca và tính lương. Nguyên Bình phát triển <strong>PerfectKey Workforce</strong> — hệ thống quản lý nhân sự, chấm công, xếp lịch và tính lương cho khách sạn — và có thể tuỳ biến cho doanh nghiệp ở các ngành khác.</p><h3>Phân hệ chính</h3><ul><li>Hồ sơ nhân viên, cơ cấu tổ chức, chức danh.</li><li>Phân công, xếp lịch ca làm.</li><li>Chấm công, bảng công, tăng ca.</li><li>Tính lương, phí dịch vụ (service charge).</li><li>Dashboard tổng quan nhân sự.</li><li>Ứng dụng di động cho nhân viên dùng chung API với web.</li></ul>",
+        "deliverables": "<ul><li>Web quản trị cho phòng nhân sự và quản lý</li><li>Ứng dụng di động (Android/iOS)</li><li>Cấu hình theo quy chế lương, ca làm của doanh nghiệp</li><li>Đào tạo và hỗ trợ vận hành</li></ul>",
+        "process": [
+          {
+            "title": "Tư vấn & khảo sát",
+            "description": "Tìm hiểu mô hình kinh doanh, quy trình và số điểm bán/phòng ban cần dùng.",
+            "output": "Đề xuất gói phần mềm và cấu hình phù hợp"
+          },
+          {
+            "title": "Cài đặt & cấu hình",
+            "description": "Cài đặt phần mềm, thiết lập danh mục, phân quyền, mẫu in và kết nối thiết bị.",
+            "output": "Hệ thống sẵn sàng sử dụng"
+          },
+          {
+            "title": "Đào tạo người dùng",
+            "description": "Hướng dẫn theo vai trò: nhân viên, quản lý, kế toán, quản trị hệ thống.",
+            "output": "Người dùng thao tác được nghiệp vụ hằng ngày"
+          },
+          {
+            "title": "Đồng hành vận hành",
+            "description": "Hỗ trợ trong giai đoạn đầu chạy thật, xử lý phát sinh và tinh chỉnh cấu hình.",
+            "output": "Vận hành ổn định"
+          },
+          {
+            "title": "Bảo trì định kỳ",
+            "description": "Kiểm tra, sao lưu dữ liệu, vệ sinh hệ thống và thiết bị, cập nhật phiên bản.",
+            "output": "Hệ thống chạy ổn định, dữ liệu an toàn"
+          }
+        ],
+        "features": [
+          {
+            "title": "Chấm công & bảng công",
+            "description": "Ghi nhận công theo ca, tổng hợp bảng công và tăng ca.",
+            "icon": "calendar"
+          },
+          {
+            "title": "Xếp lịch ca làm",
+            "description": "Lập lịch theo bộ phận, theo tuần/tháng.",
+            "icon": "clipboard-list"
+          },
+          {
+            "title": "Tính lương",
+            "description": "Tính lương theo quy chế, phí dịch vụ và các khoản điều chỉnh.",
+            "icon": "wallet"
+          },
+          {
+            "title": "Web + Mobile",
+            "description": "Quản lý trên web, nhân viên dùng ứng dụng di động.",
+            "icon": "smartphone"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "phan-mem-pos-ban-hang",
+      "name": "Phần mềm POS bán hàng & dịch vụ setup",
+      "category": "giai-phap-phan-mem",
+      "folder": "Dịch vụ/Phần mềm POS",
+      "publish": true,
+      "relatedProjects": [
+        "pos-nguyen-binh",
+        "quan-ly-khach-san"
+      ],
+      "images": [
+        "perfectkey-so-do-pos-nha-hang.jpg"
+      ],
+      "cover": "perfectkey-so-do-pos-nha-hang.jpg",
+      "set": {
+        "icon": "receipt",
+        "isFeatured": true,
+        "sortOrder": 2,
+        "shortDescription": "Cung cấp phần mềm POS cho nhà hàng, quán cà phê, cửa hàng bán lẻ và khách sạn; trọn gói setup thiết bị, cấu hình, đào tạo, bảo trì và vệ sinh hệ thống định kỳ.",
+        "description": "<p>Nguyên Bình cung cấp phần mềm POS và đi cùng khách hàng từ lúc chọn thiết bị đến khi hệ thống chạy ổn định. Với nhà hàng trong khách sạn, POS được kết nối với phần mềm quản lý khách sạn để chuyển hoá đơn vào phòng và trừ kho tự động.</p><h3>Dịch vụ đi kèm</h3><ul><li><strong>Tư vấn</strong> gói phần mềm và thiết bị: máy POS, máy in hoá đơn, máy in bếp/bar, ngăn kéo đựng tiền, máy quét mã vạch.</li><li><strong>Setup tại chỗ</strong>: cài đặt, khai báo thực đơn/hàng hoá, sơ đồ bàn, mẫu in, phân quyền thu ngân.</li><li><strong>Đào tạo</strong> thu ngân, phục vụ, quản lý.</li><li><strong>Hỗ trợ vận hành</strong> và xử lý sự cố.</li><li><strong>Bảo trì, vệ sinh hệ thống</strong> định kỳ: kiểm tra phần cứng, vệ sinh thiết bị, dọn dẹp dữ liệu, sao lưu và cập nhật phiên bản.</li></ul><h3>Ví dụ: POS nhà hàng trong khách sạn (giải pháp PerfectKey)</h3><figure><img src=\"{{img:perfectkey-so-do-pos-nha-hang.jpg}}\" alt=\"Sơ đồ POS nhà hàng: order từ smartphone, in captain order cho bếp/bar, chuyển dữ liệu sang Front Office\" loading=\"lazy\" /><figcaption>Sơ đồ POS nhà hàng: order từ smartphone, in captain order cho bếp/bar, chuyển dữ liệu sang Front Office</figcaption></figure><ul><li>Tách, ghép hoá đơn; chuyển món sang bàn khác; kiểm soát quá trình in.</li><li>Chiết khấu linh hoạt theo hoá đơn, từng món, nhóm món hoặc theo giờ.</li><li>Tự động trừ kho theo định lượng; theo dõi công nợ khách hàng.</li></ul>",
+        "deliverables": "<ul><li>Phần mềm POS đã cấu hình theo cửa hàng</li><li>Thiết bị được cài đặt, kết nối</li><li>Đào tạo nhân viên</li><li>Lịch bảo trì, vệ sinh hệ thống định kỳ</li></ul>",
+        "process": [
+          {
+            "title": "Tư vấn & khảo sát",
+            "description": "Tìm hiểu mô hình kinh doanh, quy trình và số điểm bán/phòng ban cần dùng.",
+            "output": "Đề xuất gói phần mềm và cấu hình phù hợp"
+          },
+          {
+            "title": "Cài đặt & cấu hình",
+            "description": "Cài đặt phần mềm, thiết lập danh mục, phân quyền, mẫu in và kết nối thiết bị.",
+            "output": "Hệ thống sẵn sàng sử dụng"
+          },
+          {
+            "title": "Đào tạo người dùng",
+            "description": "Hướng dẫn theo vai trò: nhân viên, quản lý, kế toán, quản trị hệ thống.",
+            "output": "Người dùng thao tác được nghiệp vụ hằng ngày"
+          },
+          {
+            "title": "Đồng hành vận hành",
+            "description": "Hỗ trợ trong giai đoạn đầu chạy thật, xử lý phát sinh và tinh chỉnh cấu hình.",
+            "output": "Vận hành ổn định"
+          },
+          {
+            "title": "Bảo trì định kỳ",
+            "description": "Kiểm tra, sao lưu dữ liệu, vệ sinh hệ thống và thiết bị, cập nhật phiên bản.",
+            "output": "Hệ thống chạy ổn định, dữ liệu an toàn"
+          }
+        ],
+        "features": [
+          {
+            "title": "Setup trọn gói",
+            "description": "Cài đặt phần mềm, thiết bị, thực đơn, sơ đồ bàn, mẫu in.",
+            "icon": "settings"
+          },
+          {
+            "title": "Đào tạo tại chỗ",
+            "description": "Hướng dẫn thu ngân, phục vụ, quản lý theo đúng ca làm.",
+            "icon": "users"
+          },
+          {
+            "title": "Bảo trì & vệ sinh hệ thống",
+            "description": "Kiểm tra, vệ sinh thiết bị, sao lưu dữ liệu, cập nhật phiên bản.",
+            "icon": "wrench"
+          },
+          {
+            "title": "Kết nối khách sạn",
+            "description": "Chuyển hoá đơn vào phòng, trừ kho tự động khi dùng cùng PerfectKey.",
+            "icon": "hotel"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "phan-mem-quan-ly-khach-san-perfectkey",
+      "name": "Phần mềm quản lý khách sạn PerfectKey",
+      "category": "giai-phap-phan-mem",
+      "folder": "Dịch vụ/PerfectKey",
+      "publish": true,
+      "relatedProjects": [
+        "quan-ly-khach-san",
+        "perfectkey-app",
+        "perfectkey-workforce"
+      ],
+      "images": [
+        "perfectkey-front-office-management.jpg",
+        "perfectkey-so-do-pos-nha-hang.jpg",
+        "perfectkey-so-do-ket-noi-khoa-tu-tong-dai.jpg",
+        "perfectkey-quy-trinh-tu-dong-tru-kho.jpg",
+        "perfectkey-dinh-luong-mon-an.jpg",
+        "perfectkey-phieu-xuat-kho-tu-dong.jpg",
+        "perfectkey-so-do-ke-toan-back-office.jpg"
+      ],
+      "cover": "perfectkey-front-office-management.jpg",
+      "set": {
+        "icon": "hotel",
+        "isFeatured": true,
+        "sortOrder": 3,
+        "shortDescription": "Tư vấn, cung cấp và triển khai Perfect Key Management (PKM) cho khách sạn, resort, nhà hàng: Front Office, POS, Back Office kế toán, trừ kho tự động, kết nối khoá từ và tổng đài.",
+        "description": "<p><em>Perfect Key Management là sản phẩm của Công ty TNHH Tin học Thương mại Nhị Hà (<a href=\"https://quanlykhachsan.com/\" target=\"_blank\" rel=\"noopener\">quanlykhachsan.com</a>). Nguyên Bình là đơn vị liên kết tư vấn, cung cấp và triển khai.</em></p><p>Perfect Key Management áp dụng quy trình quản lý tương tự các khách sạn 5 sao quốc tế, bao phủ lễ tân, bán hàng, kế toán và kho trên cùng một dữ liệu.</p><h3>Front Office Management</h3><figure><img src=\"{{img:perfectkey-front-office-management.jpg}}\" alt=\"Perfect Key Management — phần mềm quản lý khách sạn\" loading=\"lazy\" /><figcaption>Perfect Key Management — phần mềm quản lý khách sạn</figcaption></figure><ul><li>Tiền phòng tính theo ngày qua <strong>Night Auditor</strong>: kiểm toán cuối ngày, đóng doanh thu, đối chiếu báo cáo các bộ phận.</li><li>Phát sinh được ghi theo hệ thống tài khoản <strong>Nợ – Có</strong>, phân biệt rõ doanh thu và tiền thu được; khách chỉ check-out khi folio cân đối.</li><li><strong>Folio</strong>: transfer, routing, combine, split — tách, gộp hoá đơn nhanh và chính xác.</li><li>Sửa sai bằng thao tác Correction (tương đương bút toán đỏ); sau Night Auditor chỉ được Rebate/giảm trừ.</li><li>Phòng ảo (Dump Room) để theo dõi thanh toán trung gian và chi phí nội bộ.</li></ul><h3>POS nhà hàng</h3><figure><img src=\"{{img:perfectkey-so-do-pos-nha-hang.jpg}}\" alt=\"Sơ đồ POS: order từ smartphone, in order bếp/bar, chuyển dữ liệu sang Front Office\" loading=\"lazy\" /><figcaption>Sơ đồ POS: order từ smartphone, in order bếp/bar, chuyển dữ liệu sang Front Office</figcaption></figure><ul><li>Tự động trừ kho theo định lượng; tự tạo phiếu thu, giấy báo có; theo dõi công nợ 131 (City Ledger).</li><li>Nhập captain order từ smartphone; khách đặt món bằng smartphone hoặc smart TV trên phòng.</li><li>Tách/ghép hoá đơn, chuyển món, chiết khấu linh hoạt, quản lý deposit.</li></ul><h3>Tự động trừ kho theo định lượng</h3><figure><img src=\"{{img:perfectkey-quy-trinh-tu-dong-tru-kho.jpg}}\" alt=\"Quy trình giữa thu ngân các điểm POS và quản lý kho\" loading=\"lazy\" /><figcaption>Quy trình giữa thu ngân các điểm POS và quản lý kho</figcaption></figure><p>Khai báo danh mục kho (bếp, tổng, housekeeping, minibar…), vật tư và định lượng cho từng món. Sau mỗi lần chạy Night, phần mềm tự tạo phiếu xuất kho đúng kho phát sinh tiêu hao.</p><figure><img src=\"{{img:perfectkey-dinh-luong-mon-an.jpg}}\" alt=\"Định nghĩa định lượng món ăn, đồ uống\" loading=\"lazy\" /><figcaption>Định nghĩa định lượng món ăn, đồ uống</figcaption></figure><figure><img src=\"{{img:perfectkey-phieu-xuat-kho-tu-dong.jpg}}\" alt=\"Phiếu xuất kho tự động sau khi chạy Night\" loading=\"lazy\" /><figcaption>Phiếu xuất kho tự động sau khi chạy Night</figcaption></figure><h3>Back Office kế toán</h3><figure><img src=\"{{img:perfectkey-so-do-ke-toan-back-office.jpg}}\" alt=\"Sơ đồ kế toán Back Office tích hợp Front Office và POS\" loading=\"lazy\" /><figcaption>Sơ đồ kế toán Back Office tích hợp Front Office và POS</figcaption></figure><ul><li>Sổ sách nội bộ và sổ sách thuế trên một phần mềm, dữ liệu nhập một lần.</li><li>Tuân theo Quyết định 48 hoặc 15 của Bộ Tài chính; đẩy dữ liệu sang phần mềm hỗ trợ kê khai.</li><li>Chạy qua mạng nội bộ hoặc internet, tự động sao lưu, phân quyền từng người dùng.</li></ul><h3>Kết nối hệ thống khác</h3><figure><img src=\"{{img:perfectkey-so-do-ket-noi-khoa-tu-tong-dai.jpg}}\" alt=\"PKM kết nối khoá từ, smart TV, tổng đài, truyền hình trả tiền\" loading=\"lazy\" /><figcaption>PKM kết nối khoá từ, smart TV, tổng đài, truyền hình trả tiền</figcaption></figure><ul><li>Khoá từ: ONITY, VINGCARD, HUNE, ORBITA, BE TECH, ADEL…</li><li>Tổng đài: tính cước; mở/đóng line khi check-in/check-out, báo thức, báo tin nhắn, cập nhật phòng sạch/bẩn, nhập minibar bằng điện thoại.</li><li>Hệ thống truyền hình trả tiền.</li></ul>",
+        "deliverables": "<ul><li>Bản quyền phần mềm Perfect Key Management theo phân hệ</li><li>Cài đặt, cấu hình, chuyển dữ liệu</li><li>Kết nối khoá từ, tổng đài, thiết bị POS</li><li>Đào tạo theo bộ phận: lễ tân, thu ngân, kế toán, kho, housekeeping</li><li>Hỗ trợ vận hành, bảo trì</li></ul>",
+        "process": [
+          {
+            "title": "Tư vấn & khảo sát",
+            "description": "Tìm hiểu mô hình kinh doanh, quy trình và số điểm bán/phòng ban cần dùng.",
+            "output": "Đề xuất gói phần mềm và cấu hình phù hợp"
+          },
+          {
+            "title": "Cài đặt & cấu hình",
+            "description": "Cài đặt phần mềm, thiết lập danh mục, phân quyền, mẫu in và kết nối thiết bị.",
+            "output": "Hệ thống sẵn sàng sử dụng"
+          },
+          {
+            "title": "Đào tạo người dùng",
+            "description": "Hướng dẫn theo vai trò: nhân viên, quản lý, kế toán, quản trị hệ thống.",
+            "output": "Người dùng thao tác được nghiệp vụ hằng ngày"
+          },
+          {
+            "title": "Đồng hành vận hành",
+            "description": "Hỗ trợ trong giai đoạn đầu chạy thật, xử lý phát sinh và tinh chỉnh cấu hình.",
+            "output": "Vận hành ổn định"
+          },
+          {
+            "title": "Bảo trì định kỳ",
+            "description": "Kiểm tra, sao lưu dữ liệu, vệ sinh hệ thống và thiết bị, cập nhật phiên bản.",
+            "output": "Hệ thống chạy ổn định, dữ liệu an toàn"
+          }
+        ],
+        "features": [
+          {
+            "title": "Front Office",
+            "description": "Đặt phòng, check-in/out, folio, Night Auditor.",
+            "icon": "hotel"
+          },
+          {
+            "title": "POS nhà hàng",
+            "description": "Order smartphone, in bếp/bar, chuyển hoá đơn vào phòng.",
+            "icon": "utensils"
+          },
+          {
+            "title": "Back Office kế toán",
+            "description": "Theo Quyết định 48/15, công nợ 131, nhiều bộ báo cáo.",
+            "icon": "receipt"
+          },
+          {
+            "title": "Trừ kho tự động",
+            "description": "Theo định lượng cho nhà hàng, minibar, amenities.",
+            "icon": "boxes"
+          },
+          {
+            "title": "Kết nối thiết bị",
+            "description": "Khoá từ, tổng đài, smart TV, truyền hình trả tiền.",
+            "icon": "plug-zap"
+          },
+          {
+            "title": "Ứng dụng di động",
+            "description": "App Perfect Key trên Android: chọn khách sạn, scan giấy tờ định danh.",
+            "icon": "smartphone"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "thi-cong-he-thong-dien-nhe",
+      "name": "Tư vấn, thiết kế & thi công hệ thống điện nhẹ",
+      "category": "ha-tang-dich-vu-ky-thuat",
+      "folder": "Dịch vụ/Điện nhẹ",
+      "publish": true,
+      "relatedProjects": [
+        "tuong-quang-phat"
+      ],
+      "images": [
+        "dien-nhe-ban-ve-ha-tang.jpg",
+        "tuong-quang-phat-doi-ky-thuat.jpg"
+      ],
+      "cover": "dien-nhe-tu-van-thiet-ke-thi-cong.jpg",
+      "set": {
+        "icon": "plug-zap",
+        "isFeatured": false,
+        "sortOrder": 10,
+        "shortDescription": "Tư vấn thiết kế, cung cấp thiết bị và thi công hạ tầng điện nhẹ: camera giám sát, báo động, máy chấm công và kiểm soát ra vào, âm thanh, mạng LAN, tổng đài.",
+        "description": "<p>Hạ tầng điện nhẹ là nền tảng để các phần mềm quản lý (POS, chấm công, quản lý khách sạn) vận hành ổn định. Nguyên Bình cung cấp trọn gói từ thiết kế, thiết bị đến thi công cho văn phòng, nhà hàng, khách sạn và toà nhà.</p><h3>Hạng mục</h3><ul><li>Hệ thống an ninh – camera giám sát, hệ thống báo động.</li><li>Máy chấm công và hệ thống kiểm soát ra vào (kết nối được với phần mềm HRM).</li><li>Hệ thống âm thanh.</li><li>Mạng LAN, wifi, tủ rack.</li><li>Tổng đài điện thoại.</li><li>Cung cấp thiết bị điện nhẹ.</li></ul><figure><img src=\"{{img:dien-nhe-ban-ve-ha-tang.jpg}}\" alt=\"Tư vấn, thiết kế hạ tầng trước khi thi công\" loading=\"lazy\" /><figcaption>Tư vấn, thiết kế hạ tầng trước khi thi công</figcaption></figure><figure><img src=\"{{img:tuong-quang-phat-doi-ky-thuat.jpg}}\" alt=\"Đội ngũ kỹ thuật đối tác Tường Quang Phát\" loading=\"lazy\" /><figcaption>Đội ngũ kỹ thuật đối tác Tường Quang Phát</figcaption></figure><p><em>Dịch vụ được Nguyên Bình cung cấp và triển khai cùng đối tác <a href=\"https://tuongquangphat.vn/\" target=\"_blank\" rel=\"noopener\">Công ty TNHH Tường Quang Phát</a>.</em></p>",
+        "deliverables": "<ul><li>Bản thiết kế, dự toán thiết bị</li><li>Thi công, lắp đặt, cấu hình</li><li>Nghiệm thu, bàn giao</li><li>Bảo hành, bảo trì</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát mặt bằng",
+            "description": "Khảo sát hiện trạng và nhu cầu sử dụng.",
+            "output": "Phương án sơ bộ"
+          },
+          {
+            "title": "Thiết kế & báo giá",
+            "description": "Thiết kế hệ thống, chọn thiết bị phù hợp ngân sách.",
+            "output": "Bản vẽ, dự toán"
+          },
+          {
+            "title": "Thi công lắp đặt",
+            "description": "Đi dây, lắp đặt và cấu hình thiết bị.",
+            "output": "Hệ thống hoạt động"
+          },
+          {
+            "title": "Nghiệm thu & bảo hành",
+            "description": "Kiểm tra, hướng dẫn sử dụng, bảo hành bảo trì.",
+            "output": "Biên bản nghiệm thu"
+          }
+        ],
+        "features": [
+          {
+            "title": "Camera & báo động",
+            "description": "Giám sát an ninh cho văn phòng, cửa hàng, khách sạn.",
+            "icon": "shield-check"
+          },
+          {
+            "title": "Chấm công & kiểm soát ra vào",
+            "description": "Kết nối dữ liệu chấm công với phần mềm nhân sự.",
+            "icon": "users"
+          },
+          {
+            "title": "Mạng LAN & tổng đài",
+            "description": "Hạ tầng mạng, wifi, tổng đài nội bộ.",
+            "icon": "server"
+          },
+          {
+            "title": "Âm thanh",
+            "description": "Hệ thống âm thanh cho nhà hàng, hội trường, toà nhà.",
+            "icon": "bell"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "dich-vu-cong-nghe-thong-tin",
+      "name": "Dịch vụ CNTT: bảo trì, IT helpdesk, quản trị hạ tầng",
+      "category": "ha-tang-dich-vu-ky-thuat",
+      "folder": "Dịch vụ/Công nghệ thông tin",
+      "publish": true,
+      "images": [
+        "tuong-quang-phat-doi-ky-thuat.jpg"
+      ],
+      "cover": "tuong-quang-phat-doi-ky-thuat.jpg",
+      "set": {
+        "icon": "server",
+        "isFeatured": false,
+        "sortOrder": 11,
+        "shortDescription": "Bảo hành, bảo trì, sửa chữa thiết bị; IT helpdesk và quản trị hạ tầng CNTT cho doanh nghiệp — để hệ thống phần mềm và thiết bị luôn hoạt động ổn định.",
+        "description": "<p>Doanh nghiệp không cần tự duy trì bộ phận IT lớn: Nguyên Bình cùng đối tác đảm nhận việc giữ cho máy tính, máy chủ, mạng và thiết bị đầu cuối (POS, máy in, máy chấm công) luôn sẵn sàng.</p><h3>Dịch vụ</h3><ul><li>Dịch vụ bảo hành.</li><li>Dịch vụ bảo trì định kỳ, vệ sinh hệ thống và thiết bị.</li><li>Dịch vụ sửa chữa.</li><li>Hệ thống IT helpdesk — tiếp nhận và xử lý yêu cầu hỗ trợ của nhân viên.</li><li>Quản trị hạ tầng: máy chủ, mạng, sao lưu, phân quyền.</li></ul><figure><img src=\"{{img:tuong-quang-phat-doi-ky-thuat.jpg}}\" alt=\"Đội ngũ kỹ thuật đối tác Tường Quang Phát\" loading=\"lazy\" /><figcaption>Đội ngũ kỹ thuật đối tác Tường Quang Phát</figcaption></figure><p><em>Dịch vụ được Nguyên Bình cung cấp và triển khai cùng đối tác <a href=\"https://tuongquangphat.vn/\" target=\"_blank\" rel=\"noopener\">Công ty TNHH Tường Quang Phát</a>.</em></p>",
+        "deliverables": "<ul><li>Lịch bảo trì định kỳ</li><li>Kênh tiếp nhận yêu cầu hỗ trợ</li><li>Báo cáo tình trạng hệ thống</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát hiện trạng",
+            "description": "Kiểm kê thiết bị, mạng, phần mềm đang dùng.",
+            "output": "Danh mục tài sản CNTT"
+          },
+          {
+            "title": "Đề xuất gói dịch vụ",
+            "description": "Phạm vi hỗ trợ, tần suất bảo trì.",
+            "output": "Hợp đồng dịch vụ"
+          },
+          {
+            "title": "Vận hành & hỗ trợ",
+            "description": "Bảo trì định kỳ, xử lý sự cố, helpdesk.",
+            "output": "Hệ thống ổn định"
+          }
+        ],
+        "features": [
+          {
+            "title": "Bảo trì định kỳ",
+            "description": "Kiểm tra, vệ sinh, cập nhật thiết bị và phần mềm.",
+            "icon": "wrench"
+          },
+          {
+            "title": "IT helpdesk",
+            "description": "Tiếp nhận và xử lý yêu cầu hỗ trợ của nhân viên.",
+            "icon": "message-square"
+          },
+          {
+            "title": "Quản trị hạ tầng",
+            "description": "Máy chủ, mạng, sao lưu, phân quyền.",
+            "icon": "server"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "ve-sinh-cong-nghiep",
+      "name": "Vệ sinh công nghiệp toà nhà, nhà hàng, khách sạn",
+      "category": "ha-tang-dich-vu-ky-thuat",
+      "folder": "Dịch vụ/Vệ sinh công nghiệp",
+      "publish": true,
+      "images": [
+        "ve-sinh-cong-nghiep-khu-bep-nha-hang.jpg"
+      ],
+      "cover": "ve-sinh-cong-nghiep-phong-khach-san.jpg",
+      "set": {
+        "icon": "sparkles",
+        "isFeatured": false,
+        "sortOrder": 12,
+        "shortDescription": "Vệ sinh công nghiệp cho toà nhà, nhà hàng, khách sạn, văn phòng và chung cư — cung cấp cùng đối tác Tường Quang Phát.",
+        "description": "<p>Dành cho khách hàng nhà hàng, khách sạn và toà nhà cần một đầu mối cho cả phần mềm, hạ tầng và vận hành.</p><h3>Dịch vụ</h3><ul><li>Vệ sinh công nghiệp toà nhà, nhà hàng, khách sạn.</li><li>Vệ sinh toà nhà, văn phòng, chung cư.</li></ul><figure><img src=\"{{img:ve-sinh-cong-nghiep-khu-bep-nha-hang.jpg}}\" alt=\"Không gian nhà hàng, khu bếp\" loading=\"lazy\" /><figcaption>Không gian nhà hàng, khu bếp</figcaption></figure><p><em>Dịch vụ được Nguyên Bình cung cấp và triển khai cùng đối tác <a href=\"https://tuongquangphat.vn/\" target=\"_blank\" rel=\"noopener\">Công ty TNHH Tường Quang Phát</a>.</em></p>",
+        "deliverables": "<ul><li>Khảo sát và báo giá theo diện tích, hạng mục</li><li>Lịch vệ sinh định kỳ hoặc theo đợt</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát",
+            "description": "Khảo sát diện tích, hiện trạng, yêu cầu.",
+            "output": "Báo giá"
+          },
+          {
+            "title": "Thực hiện",
+            "description": "Vệ sinh theo hạng mục và lịch đã thống nhất.",
+            "output": "Không gian sạch, nghiệm thu"
+          }
+        ],
+        "features": [
+          {
+            "title": "Nhà hàng, khách sạn",
+            "description": "Vệ sinh khu vực công cộng, phòng, khu bếp.",
+            "icon": "hotel"
+          },
+          {
+            "title": "Toà nhà, văn phòng",
+            "description": "Vệ sinh định kỳ văn phòng, chung cư, toà nhà.",
+            "icon": "building-2"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "phat-trien-phan-mem-theo-yeu-cau",
+      "name": "Phát triển phần mềm theo yêu cầu",
+      "category": "phat-trien-phan-mem",
+      "folder": "Dịch vụ/Phát triển phần mềm theo yêu cầu",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-workforce",
+        "perfectkey-app",
+        "quan-ly-khach-san"
+      ],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core",
+        "React",
+        "TypeScript",
+        "Flutter",
+        "SQL Server"
+      ],
+      "set": {
+        "icon": "code",
+        "isFeatured": true,
+        "sortOrder": 20,
+        "shortDescription": "Xây phần mềm theo đúng quy trình của doanh nghiệp: web quản trị, mobile app, API và tích hợp với hệ thống sẵn có.",
+        "description": "<p>Khi phần mềm đóng gói không phù hợp, Nguyên Bình xây dựng hệ thống riêng: phân tích nghiệp vụ, thiết kế, phát triển, triển khai và bảo trì. Các hệ thống đã thực hiện gồm quản lý nhân sự PerfectKey Workforce, ứng dụng Perfect Key cho khách sạn và hệ thống quản trị nội bộ cho doanh nghiệp xây dựng.</p><ul><li>Web quản trị, cổng khách hàng, mobile app.</li><li>API và tích hợp với phần mềm kế toán, POS, thiết bị.</li><li>Kiến trúc rõ ràng, dễ mở rộng và bảo trì lâu dài.</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "thiet-ke-website",
+      "name": "Thiết kế website doanh nghiệp",
+      "category": "website-ecommerce",
+      "folder": "Dịch vụ/Thiết kế website doanh nghiệp",
+      "publish": true,
+      "relatedProjects": [
+        "com-thi-no",
+        "tuong-quang-phat",
+        "a-smart"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript"
+      ],
+      "set": {
+        "icon": "globe",
+        "isFeatured": false,
+        "sortOrder": 21,
+        "shortDescription": "Website giới thiệu doanh nghiệp, nhà hàng, cửa hàng: chuẩn SEO, tối ưu điện thoại, dễ tự cập nhật nội dung.",
+        "description": "<p>Website là kênh khách hàng tìm thấy doanh nghiệp đầu tiên. Nguyên Bình thiết kế website gọn, nhanh, chuẩn SEO và có trang quản trị để doanh nghiệp tự cập nhật.</p><ul><li>Giao diện riêng theo thương hiệu, tối ưu điện thoại.</li><li>SEO on-page, SEO local theo khu vực, dữ liệu có cấu trúc.</li><li>Nút gọi, Zalo, Messenger; form liên hệ, đặt hàng/đặt bàn.</li></ul>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "phat-trien-mobile-app",
+      "name": "Phát triển Mobile App",
+      "category": "mobile",
+      "folder": "Dịch vụ/Phát triển Mobile App",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-app",
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        "Flutter"
+      ],
+      "set": {
+        "icon": "smartphone",
+        "isFeatured": false,
+        "sortOrder": 22,
+        "shortDescription": "Ứng dụng Android/iOS cho nhân viên và khách hàng, dùng chung API với hệ thống web.",
+        "description": "<p>Nguyên Bình phát triển ứng dụng di động phục vụ vận hành: nhân viên chấm công, xem lịch, xử lý nghiệp vụ; khách hàng tra cứu, đặt dịch vụ. Ví dụ: ứng dụng Perfect Key (Android) cho khách sạn và ứng dụng PerfectKey Workforce.</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "asp-net-development",
+      "name": "ASP.NET Development",
+      "category": "phat-trien-phan-mem",
+      "folder": "Dịch vụ/ASP.NET Development",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core",
+        "SQL Server"
+      ],
+      "set": {
+        "icon": "server",
+        "isFeatured": false,
+        "sortOrder": 23,
+        "shortDescription": "Backend ASP.NET Core theo Clean Architecture: API, phân quyền, tích hợp, hiệu năng và bảo mật.",
+        "description": "<p>Backend .NET cho hệ thống doanh nghiệp: kiến trúc nhiều lớp, Entity Framework Core với SQL Server, xác thực và phân quyền, ghi log, kiểm thử tự động. PerfectKey Workforce được xây trên nền ASP.NET Core (.NET 9).</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "react-development",
+      "name": "React Development",
+      "category": "phat-trien-phan-mem",
+      "folder": "Dịch vụ/React Development",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript"
+      ],
+      "set": {
+        "icon": "code",
+        "isFeatured": false,
+        "sortOrder": 24,
+        "shortDescription": "Giao diện web quản trị và website bằng React + TypeScript: nhanh, dễ bảo trì, chuẩn SEO khi cần.",
+        "description": "<p>Nguyên Bình dùng React và TypeScript cho web quản trị nghiệp vụ (bảng dữ liệu lớn, form nhiều bước, dashboard) và website cần SEO (render phía server).</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "flutter-development",
+      "name": "Flutter Development",
+      "category": "mobile",
+      "folder": "Dịch vụ/Flutter Development",
+      "publish": true,
+      "relatedProjects": [
+        "perfectkey-workforce"
+      ],
+      "technologies": [
+        "Flutter"
+      ],
+      "set": {
+        "icon": "smartphone",
+        "isFeatured": false,
+        "sortOrder": 25,
+        "shortDescription": "Ứng dụng đa nền tảng Android/iOS bằng Flutter, một mã nguồn cho cả hai hệ điều hành.",
+        "description": "<p>Flutter giúp phát triển ứng dụng cho cả Android và iOS từ một mã nguồn, tiết kiệm chi phí và thời gian. Ứng dụng di động PerfectKey Workforce được phát triển bằng Flutter, dùng chung hợp đồng API với web.</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "ecommerce",
+      "name": "Xây dựng Ecommerce",
+      "category": "website-ecommerce",
+      "folder": "Dịch vụ/Xây dựng Ecommerce",
+      "publish": true,
+      "relatedProjects": [
+        "a-smart"
+      ],
+      "technologies": [],
+      "set": {
+        "icon": "shopping-cart",
+        "isFeatured": false,
+        "sortOrder": 26,
+        "shortDescription": "Website bán hàng: danh mục sản phẩm, giá theo khu vực, tồn kho, khuyến mãi, flash sale, giỏ hàng.",
+        "description": "<p>Nguyên Bình xây dựng website thương mại điện tử cho cửa hàng, chuỗi bán lẻ — ví dụ website A-Smart với danh mục điện thoại, TV, phụ kiện, flash sale có đếm ngược và xem giá, tồn kho theo khu vực.</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    },
+    {
+      "slug": "tich-hop-api",
+      "name": "Tích hợp API",
+      "category": "tich-hop-van-hanh",
+      "folder": "Dịch vụ/Tích hợp API",
+      "publish": true,
+      "relatedProjects": [
+        "quan-ly-khach-san"
+      ],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core"
+      ],
+      "set": {
+        "icon": "plug-zap",
+        "isFeatured": false,
+        "sortOrder": 27,
+        "shortDescription": "Kết nối các phần mềm và thiết bị: POS, kế toán, khoá từ, tổng đài, cổng thanh toán, ứng dụng di động.",
+        "description": "<p>Dữ liệu rời rạc giữa nhiều phần mềm gây nhập liệu trùng và sai lệch. Nguyên Bình xây dựng lớp tích hợp để các hệ thống trao đổi dữ liệu tự động — ví dụ trong khách sạn: Front Office kết nối POS, kế toán, khoá từ và tổng đài.</p>",
+        "process": [
+          {
+            "title": "Khảo sát & phân tích yêu cầu",
+            "description": "Làm việc với các bộ phận sử dụng, ghi nhận quy trình hiện tại và vấn đề cần giải quyết.",
+            "output": "Tài liệu yêu cầu, phạm vi và báo giá"
+          },
+          {
+            "title": "Thiết kế giải pháp & giao diện",
+            "description": "Thiết kế luồng nghiệp vụ, dữ liệu, kiến trúc hệ thống và giao diện người dùng.",
+            "output": "Thiết kế hệ thống, giao diện được duyệt"
+          },
+          {
+            "title": "Phát triển theo giai đoạn",
+            "description": "Chia nhỏ phạm vi, bàn giao bản chạy được sau mỗi giai đoạn để khách hàng dùng thử và góp ý.",
+            "output": "Bản chạy thử theo từng giai đoạn"
+          },
+          {
+            "title": "Kiểm thử & nghiệm thu",
+            "description": "Kiểm thử chức năng, dữ liệu và hiệu năng trên môi trường thử nghiệm.",
+            "output": "Biên bản nghiệm thu"
+          },
+          {
+            "title": "Triển khai & đào tạo",
+            "description": "Cài đặt môi trường thật, chuyển dữ liệu, hướng dẫn người dùng và quản trị viên.",
+            "output": "Hệ thống vận hành, tài liệu hướng dẫn"
+          },
+          {
+            "title": "Bảo hành & hỗ trợ",
+            "description": "Theo dõi vận hành, xử lý sự cố và nâng cấp theo nhu cầu mới.",
+            "output": "Hỗ trợ kỹ thuật và cập nhật phiên bản"
+          }
+        ]
+      }
+    }
+  ],
+  "partners": [
+    {
+      "name": "Công ty TNHH Tường Quang Phát",
+      "url": "https://tuongquangphat.vn/",
+      "kind": "Đối tác dịch vụ hạ tầng",
+      "logo": "tuong-quang-phat-logo.jpg",
+      "sortOrder": 0
+    },
+    {
+      "name": "Perfect Key — Công ty TNHH Tin học Thương mại Nhị Hà",
+      "url": "https://quanlykhachsan.com/",
+      "kind": "Đối tác phần mềm",
+      "logo": "perfectkey-nhi-ha-logo.png",
+      "sortOrder": 1
+    }
+  ],
+  "settings": {
+    "brand": {
+      "media": {
+        "logo": "nguyen-binh-bieu-tuong.png",
+        "logoDark": "nguyen-binh-logo-nen-toi.png",
+        "favicon": "nguyen-binh-favicon.png"
+      }
+    },
+    "theme": {
+      "set": {
+        "primaryColor": "#1E5A36",
+        "accentColor": "#C9A04F",
+        "darkColor": "#0B110D"
+      }
+    },
+    "seo": {
+      "set": {
+        "defaultTitle": "Nguyên Bình Technology — Phần mềm doanh nghiệp, POS, khách sạn, HRM",
+        "defaultDescription": "Phần mềm quản lý doanh nghiệp, HRM, POS, quản lý khách sạn PerfectKey; website, mobile app và dịch vụ hạ tầng CNTT, điện nhẹ cho doanh nghiệp."
+      },
+      "media": {
+        "defaultOgImage": "nguyen-binh-anh-chia-se.jpg"
+      }
+    }
+  }
 }

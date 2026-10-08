@@ -25,7 +25,8 @@ public static class DependencyInjection
             throw new InvalidOperationException(
                                    "Thiếu ConnectionStrings:Default (đặt qua user-secrets hoặc biến môi trường ConnectionStrings__Default).");
 
-        services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, sql =>
+        services.AddSingleton<PublicCacheInvalidator>();
+        services.AddDbContext<AppDbContext>((sp, options) => options.AddInterceptors(sp.GetRequiredService<PublicCacheInvalidator>()).UseSqlServer(connectionString, sql =>
         {
             sql.EnableRetryOnFailure(maxRetryCount: 5);
             // Noi dung co nhieu bang con (features, media, links...) → tach query tranh bung no tich Descartes.
