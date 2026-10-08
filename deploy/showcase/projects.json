@@ -12,9 +12,25 @@
         "featuredOrder": 1
       },
       "media": [
-        { "file": "a-smart-trang-chu-desktop.jpg", "kind": "DESKTOP", "caption": "Trang chủ a-smart.vn", "alt": "Giao diện trang chủ website A-Smart trên máy tính", "cover": true },
-        { "file": "a-smart-danh-muc-iphone.jpg", "kind": "DESKTOP", "caption": "Khu vực sản phẩm iPhone với bộ lọc theo dòng máy", "alt": "Danh sách sản phẩm iPhone trên website A-Smart" },
-        { "file": "a-smart-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Website A-Smart trên điện thoại" }
+        {
+          "file": "a-smart-trang-chu-desktop.jpg",
+          "kind": "DESKTOP",
+          "caption": "Trang chủ a-smart.vn",
+          "alt": "Giao diện trang chủ website A-Smart trên máy tính",
+          "cover": true
+        },
+        {
+          "file": "a-smart-danh-muc-iphone.jpg",
+          "kind": "DESKTOP",
+          "caption": "Khu vực sản phẩm iPhone với bộ lọc theo dòng máy",
+          "alt": "Danh sách sản phẩm iPhone trên website A-Smart"
+        },
+        {
+          "file": "a-smart-trang-chu-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Giao diện trên điện thoại",
+          "alt": "Website A-Smart trên điện thoại"
+        }
       ]
     },
     {
@@ -23,7 +39,9 @@
       "publish": true,
       "set": {
         "ownershipType": "CLIENT_OWNED",
-        "projectRoles": ["DEVELOPER"],
+        "projectRoles": [
+          "DEVELOPER"
+        ],
         "publicCreditText": "Nguyên Bình thiết kế và phát triển website theo yêu cầu của khách hàng.",
         "shortDescription": "Website cho quán Cơm Thị Nở (Văn Quán, Hà Đông): giới thiệu quán, thực đơn sách lật, món nổi bật, đặt cơm văn phòng/cơm đoàn và nội dung SEO local theo khu vực.",
         "overview": "<p>Cơm Thị Nở là quán cơm quê chuẩn vị Bắc Bộ tại KĐT Văn Quán, Hà Đông, phục vụ cơm văn phòng, cơm gia đình, cơm mang về và tiệc đoàn. Website <strong>comthino.com</strong> giới thiệu quán và giúp khách đặt mâm, đặt cơm đoàn nhanh qua điện thoại, Zalo hoặc Messenger.</p>",
@@ -32,10 +50,31 @@
         "featuredOrder": 2
       },
       "media": [
-        { "file": "com-thi-no-gioi-thieu-quan.jpg", "kind": "DESKTOP", "caption": "Không gian quán và câu chuyện thương hiệu", "alt": "Website Cơm Thị Nở – phần giới thiệu không gian quán", "cover": true },
-        { "file": "com-thi-no-noi-dung-seo-local.jpg", "kind": "DESKTOP", "caption": "Nội dung SEO local theo khu vực Hà Đông – Văn Quán", "alt": "Nội dung giới thiệu quán cơm Hà Đông trên website Cơm Thị Nở" },
-        { "file": "com-thi-no-mon-noi-bat.jpg", "kind": "DESKTOP", "caption": "Món nổi bật có giá và nút đặt", "alt": "Khối món ăn nổi bật trên website Cơm Thị Nở" },
-        { "file": "com-thi-no-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Trang chủ trên điện thoại", "alt": "Website Cơm Thị Nở trên điện thoại" }
+        {
+          "file": "com-thi-no-gioi-thieu-quan.jpg",
+          "kind": "DESKTOP",
+          "caption": "Không gian quán và câu chuyện thương hiệu",
+          "alt": "Website Cơm Thị Nở – phần giới thiệu không gian quán",
+          "cover": true
+        },
+        {
+          "file": "com-thi-no-noi-dung-seo-local.jpg",
+          "kind": "DESKTOP",
+          "caption": "Nội dung SEO local theo khu vực Hà Đông – Văn Quán",
+          "alt": "Nội dung giới thiệu quán cơm Hà Đông trên website Cơm Thị Nở"
+        },
+        {
+          "file": "com-thi-no-mon-noi-bat.jpg",
+          "kind": "DESKTOP",
+          "caption": "Món nổi bật có giá và nút đặt",
+          "alt": "Khối món ăn nổi bật trên website Cơm Thị Nở"
+        },
+        {
+          "file": "com-thi-no-trang-chu-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Trang chủ trên điện thoại",
+          "alt": "Website Cơm Thị Nở trên điện thoại"
+        }
       ]
     },
     {
@@ -49,9 +88,25 @@
         "isFeatured": false
       },
       "media": [
-        { "file": "tuong-quang-phat-trang-chu-desktop.jpg", "kind": "DESKTOP", "caption": "Trang chủ tuongquangphat.vn", "alt": "Trang chủ website Tường Quang Phát", "cover": true },
-        { "file": "tuong-quang-phat-dich-vu.jpg", "kind": "DESKTOP", "caption": "Các khối dịch vụ chính", "alt": "Khối dịch vụ điện nhẹ và công nghệ thông tin trên website Tường Quang Phát" },
-        { "file": "tuong-quang-phat-trang-chu-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Website Tường Quang Phát trên điện thoại" }
+        {
+          "file": "tuong-quang-phat-trang-chu-desktop.jpg",
+          "kind": "DESKTOP",
+          "caption": "Trang chủ tuongquangphat.vn",
+          "alt": "Trang chủ website Tường Quang Phát",
+          "cover": true
+        },
+        {
+          "file": "tuong-quang-phat-dich-vu.jpg",
+          "kind": "DESKTOP",
+          "caption": "Các khối dịch vụ chính",
+          "alt": "Khối dịch vụ điện nhẹ và công nghệ thông tin trên website Tường Quang Phát"
+        },
+        {
+          "file": "tuong-quang-phat-trang-chu-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Giao diện trên điện thoại",
+          "alt": "Website Tường Quang Phát trên điện thoại"
+        }
       ]
     },
     {
@@ -67,10 +122,32 @@
         "featuredOrder": 3
       },
       "media": [
-        { "file": "perfect-key-management-trang-chu.jpg", "kind": "DESKTOP", "caption": "Website giới thiệu Perfect Key Management", "alt": "Trang chủ website Perfect Key Management", "cover": true },
-        { "file": "perfect-key-management-phan-he.jpg", "kind": "DESKTOP", "caption": "Các phân hệ: POS, Back Office, Front Office, kết nối hệ thống", "alt": "Các phân hệ của phần mềm quản lý khách sạn Perfect Key" },
-        { "file": "perfect-key-management-so-do-giai-phap.jpg", "kind": "ARCHITECTURE", "caption": "Sơ đồ giải pháp Perfect Key Management", "alt": "Sơ đồ kiến trúc giải pháp quản lý khách sạn Perfect Key Management", "architecture": true },
-        { "file": "perfect-key-management-mobile.jpg", "kind": "MOBILE", "caption": "Website trên điện thoại", "alt": "Website Perfect Key Management trên điện thoại" }
+        {
+          "file": "perfect-key-management-trang-chu.jpg",
+          "kind": "DESKTOP",
+          "caption": "Website giới thiệu Perfect Key Management",
+          "alt": "Trang chủ website Perfect Key Management",
+          "cover": true
+        },
+        {
+          "file": "perfect-key-management-phan-he.jpg",
+          "kind": "DESKTOP",
+          "caption": "Các phân hệ: POS, Back Office, Front Office, kết nối hệ thống",
+          "alt": "Các phân hệ của phần mềm quản lý khách sạn Perfect Key"
+        },
+        {
+          "file": "perfect-key-management-so-do-giai-phap.jpg",
+          "kind": "ARCHITECTURE",
+          "caption": "Sơ đồ giải pháp Perfect Key Management",
+          "alt": "Sơ đồ kiến trúc giải pháp quản lý khách sạn Perfect Key Management",
+          "architecture": true
+        },
+        {
+          "file": "perfect-key-management-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Website trên điện thoại",
+          "alt": "Website Perfect Key Management trên điện thoại"
+        }
       ]
     },
     {
@@ -84,10 +161,28 @@
         "canShowLiveUrl": false,
         "isFeatured": false
       },
-      "technologies": [".NET", "ASP.NET Core", "SQL Server", "React", "TypeScript", "Flutter"],
+      "technologies": [
+        ".NET",
+        "ASP.NET Core",
+        "SQL Server",
+        "React",
+        "TypeScript",
+        "Flutter"
+      ],
       "media": [
-        { "file": "perfectkey-workforce-dang-nhap.jpg", "kind": "DESKTOP", "caption": "Đăng nhập bằng tài khoản PKM Identity", "alt": "Màn hình đăng nhập PerfectKey Workforce", "cover": true },
-        { "file": "perfectkey-workforce-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện web trên điện thoại", "alt": "PerfectKey Workforce trên điện thoại" }
+        {
+          "file": "perfectkey-workforce-dang-nhap.jpg",
+          "kind": "DESKTOP",
+          "caption": "Đăng nhập bằng tài khoản PKM Identity",
+          "alt": "Màn hình đăng nhập PerfectKey Workforce",
+          "cover": true
+        },
+        {
+          "file": "perfectkey-workforce-dang-nhap-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Giao diện web trên điện thoại",
+          "alt": "PerfectKey Workforce trên điện thoại"
+        }
       ]
     },
     {
@@ -99,8 +194,19 @@
         "canShowLiveUrl": false
       },
       "media": [
-        { "file": "perfectkey-web-dang-nhap.jpg", "kind": "DESKTOP", "caption": "Màn hình đăng nhập PerfectKey Hotel Management System", "alt": "Đăng nhập PerfectKey Hotel Management System", "cover": true },
-        { "file": "perfectkey-web-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "PerfectKey Web trên điện thoại" }
+        {
+          "file": "perfectkey-web-dang-nhap.jpg",
+          "kind": "DESKTOP",
+          "caption": "Màn hình đăng nhập PerfectKey Hotel Management System",
+          "alt": "Đăng nhập PerfectKey Hotel Management System",
+          "cover": true
+        },
+        {
+          "file": "perfectkey-web-dang-nhap-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Giao diện trên điện thoại",
+          "alt": "PerfectKey Web trên điện thoại"
+        }
       ]
     },
     {
@@ -112,10 +218,69 @@
         "canShowLiveUrl": false
       },
       "media": [
-        { "file": "nam-viet-hung-dang-nhap-desktop.jpg", "kind": "DESKTOP", "caption": "Màn hình đăng nhập hệ thống", "alt": "Màn hình đăng nhập hệ thống Nam Việt Hùng", "cover": true },
-        { "file": "nam-viet-hung-dang-nhap-mobile.jpg", "kind": "MOBILE", "caption": "Giao diện trên điện thoại", "alt": "Hệ thống Nam Việt Hùng trên điện thoại" }
+        {
+          "file": "nam-viet-hung-dang-nhap-desktop.jpg",
+          "kind": "DESKTOP",
+          "caption": "Màn hình đăng nhập hệ thống",
+          "alt": "Màn hình đăng nhập hệ thống Nam Việt Hùng",
+          "cover": true
+        },
+        {
+          "file": "nam-viet-hung-dang-nhap-mobile.jpg",
+          "kind": "MOBILE",
+          "caption": "Giao diện trên điện thoại",
+          "alt": "Hệ thống Nam Việt Hùng trên điện thoại"
+        }
+      ]
+    },
+    {
+      "slug": "perfectkey-app",
+      "folder": "Dự án/PerfectKey App",
+      "publish": true,
+      "set": {
+        "shortDescription": "Ứng dụng Android Perfect Key cho hệ thống quản lý khách sạn PerfectKey: chọn khách sạn đang quản lý và quét giấy tờ định danh của khách (CCCD, CCCD gắn chip, hộ chiếu).",
+        "overview": "<p>Perfect Key là ứng dụng di động của hệ thống quản lý khách sạn PerfectKey, phát hành trên Google Play từ tháng 10/2023 (Android 7.0 trở lên).</p>",
+        "solution": "<ul><li>Màn hình chính liệt kê các khách sạn mà tài khoản đang quản lý để chọn nhanh.</li><li><strong>Scan định danh</strong>: chọn loại giấy tờ (căn cước công dân, căn cước công dân gắn chip, hộ chiếu) để quét thông tin khách.</li><li>Khu vực tài khoản người dùng.</li></ul>",
+        "canShowLiveUrl": true,
+        "androidUrl": "https://play.google.com/store/apps/details?id=com.pkm.app",
+        "links": [
+          {
+            "kind": "GOOGLE_PLAY",
+            "label": "Google Play",
+            "url": "https://play.google.com/store/apps/details?id=com.pkm.app"
+          }
+        ],
+        "launchDate": "2023-10-15",
+        "isFeatured": true,
+        "featuredOrder": 4
+      },
+      "media": [
+        {
+          "file": "perfectkey-app-anh-bia.jpg",
+          "kind": "MOBILE",
+          "caption": "Màn hình chọn khách sạn và scan giấy tờ định danh",
+          "alt": "Ứng dụng Perfect Key trên Android",
+          "cover": true,
+          "hidden": true
+        },
+        {
+          "file": "perfectkey-app-chon-khach-san.jpg",
+          "kind": "MOBILE",
+          "caption": "Chọn khách sạn đang quản lý",
+          "alt": "Màn hình chọn khách sạn trong ứng dụng Perfect Key"
+        },
+        {
+          "file": "perfectkey-app-scan-giay-to-dinh-danh.jpg",
+          "kind": "MOBILE",
+          "caption": "Scan giấy tờ định danh: CCCD, CCCD gắn chip, hộ chiếu",
+          "alt": "Màn hình scan định danh trong ứng dụng Perfect Key"
+        }
       ]
     }
   ],
-  "publishPages": [{ "path": "/" }]
+  "publishPages": [
+    {
+      "path": "/"
+    }
+  ]
 }

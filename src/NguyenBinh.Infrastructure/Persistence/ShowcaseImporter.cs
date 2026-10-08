@@ -27,7 +27,8 @@ public sealed class ShowcaseImporter(
     IMediaService media,
     ILogger<ShowcaseImporter> logger)
 {
-    private sealed record MediaSpec(string File, string Kind, string? Caption, string? Alt, bool Cover, bool Architecture);
+    // Hidden: chi dung lam anh bia/kien truc, khong hien trong bo anh cua trang chi tiet.
+    private sealed record MediaSpec(string File, string Kind, string? Caption, string? Alt, bool Cover, bool Architecture, bool Hidden);
 
     private sealed record ProjectSpec(string Slug, string Folder, bool Publish, JsonObject? Set, List<string>? Technologies,
         List<MediaSpec>? Media);
@@ -113,7 +114,7 @@ public sealed class ShowcaseImporter(
                 input.Media.Add(new ProjectMediaInput
                 {
                     Kind = Enum.Parse<ProjectMediaKind>(m.Kind.Replace("_", ""), ignoreCase: true),
-                    MediaId = mediaId, Caption = m.Caption, Alt = m.Alt, IsPublic = true,
+                    MediaId = mediaId, Caption = m.Caption, Alt = m.Alt, IsPublic = !m.Hidden,
                 });
                 if (m.Cover) input.CoverMediaId = input.ThumbnailMediaId = mediaId;
                 if (m.Architecture) input.ArchitectureMediaId = mediaId;
